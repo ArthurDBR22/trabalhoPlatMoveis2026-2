@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA">
+
+    <!-- Conteúdo Rolável (Dashboard) -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <!-- Fundo Superior Azul -->
+            <View
+                android:id="@+id/headerBg"
+                android:layout_width="0dp"
+                android:layout_height="220dp"
+                android:background="#007BFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Ícone de Menu (Hambúrguer) -->
+            <ImageView
+                android:id="@+id/btnMenu"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                app:tint="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Ícones do Topo (Notificação e Calendário) -->
+            <ImageView
+                android:id="@+id/btnCalendar"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_input_rounded"
+                android:backgroundTint="#22FFFFFF"
+                android:padding="8dp"
+                android:src="@drawable/baseline_calendar_month_24"
+                app:tint="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btnNotification"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_input_rounded"
+                android:backgroundTint="#22FFFFFF"
+                android:padding="8dp"
+                android:src="@drawable/baseline_notifications_24"
+                app:tint="@android:color/white"
+                app:layout_constraintEnd_toStartOf="@+id/btnCalendar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Perfil e Saudação do Professor -->
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_input_rounded"
+                android:src="@drawable/logo_instrutor"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnMenu" />
+
+            <TextView
+                android:id="@+id/txtGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Olá, Prof. Pedro!"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
+                app:layout_constraintStart_toEndOf="@+id/imgProfile"
+                app:layout_constraintTop_toTopOf="@+id/imgProfile" />
+
+            <!-- 4 Cartões de Estatísticas com Ícones -->
+            <LinearLayout
+                android:id="@+id/layoutStats"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgProfile">
+
+                <!-- Alunos ativos -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="2dp"
+                        android:src="@drawable/baseline_groups_24"
+                        app:tint="#007BFF" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="28" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alunos ativos" android:textColor="#6C757D" android:textSize="9sp"/>
+                </LinearLayout>
+
+                <!-- Treinos criados -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="3dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="2dp"
+                        android:src="@drawable/baseline_fitness_center_24"
+                        app:tint="#28A745" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treinos criados" android:textColor="#6C757D" android:textSize="9sp"/>
+                </LinearLayout>
+
+                <!-- Aulas do dia -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="3dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="2dp"
+                        android:src="@drawable/baseline_calendar_month_24"
+                        app:tint="#9333EA" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aulas do dia" android:textColor="#6C757D" android:textSize="9sp"/>
+                </LinearLayout>
+
+                <!-- Avaliação média -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="2dp"
+                        android:src="@drawable/baseline_star_24"
+                        app:tint="#FFC107" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4,9" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Avaliação média" android:textColor="#6C757D" android:textSize="9sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Seção: Ações Rápidas -->
+            <TextView
+                android:id="@+id/txtActionsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Ações rápidas"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutStats" />
+
+            <TextView
+                android:id="@+id/txtSeeAllActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="Ver todas >"
+                android:textColor="#007BFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/txtActionsTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtActionsTitle" />
+
+            <LinearLayout
+                android:id="@+id/layoutActionsGrid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtActionsTitle">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView android:layout_width="22dp" android:layout_height="22dp" android:layout_marginBottom="4dp" android:src="@drawable/baseline_groups_24" app:tint="#007BFF"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Adicionar\naluno" android:textAlignment="center" android:textColor="#0A192F" android:textSize="11sp" android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:background="@drawable/bg_input_error"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView android:layout_width="22dp" android:layout_height="22dp" android:layout_marginBottom="4dp" android:src="@drawable/baseline_fitness_center_24" app:tint="#28A745"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Criar\ntreino" android:textAlignment="center" android:textColor="#28A745" android:textSize="11sp" android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView android:layout_width="22dp" android:layout_height="22dp" android:layout_marginBottom="4dp" android:src="@drawable/baseline_calendar_month_24" app:tint="#FD7E14"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Agendar\naula" android:textAlignment="center" android:textColor="#FD7E14" android:textSize="11sp" android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView android:layout_width="22dp" android:layout_height="22dp" android:layout_marginBottom="4dp" android:src="@drawable/baseline_star_24" app:tint="#6F42C1"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ver\navaliações" android:textAlignment="center" android:textColor="#6F42C1" android:textSize="11sp" android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Seção: Aulas do dia -->
+            <TextView
+                android:id="@+id/txtClassesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Aulas do dia"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutActionsGrid" />
+
+            <TextView
+                android:id="@+id/txtSeeAllClasses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="Ver agenda >"
+                android:textColor="#007BFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/txtClassesTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtClassesTitle" />
+
+            <LinearLayout
+                android:id="@+id/cardClass1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtClassesTitle">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="08:00" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="16dp" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treino de Pernas" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sala de Musculação" android:textColor="#6C757D" android:textSize="11sp"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5 alunos" android:textColor="#6C757D" android:textSize="12sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cardClass2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardClass1">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10:00" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="16dp" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treino Funcional" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Área Funcional" android:textColor="#6C757D" android:textSize="11sp"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8 alunos" android:textColor="#6C757D" android:textSize="12sp"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR FIXA -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Início -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/baseline_bar_chart_24"
+                app:tint="#007BFF" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Início"
+                android:textColor="#007BFF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Alunos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/baseline_groups_24"
+                app:tint="#6C757D" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Alunos"
+                android:textColor="#6C757D"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Treinos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/baseline_fitness_center_24"
+                app:tint="#6C757D" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Treinos"
+                android:textColor="#6C757D"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Agenda -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/baseline_calendar_month_24"
+                app:tint="#6C757D" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Agenda"
+                android:textColor="#6C757D"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Perfil -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/baseline_star_24"
+                app:tint="#6C757D" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Perfil"
+                android:textColor="#6C757D"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

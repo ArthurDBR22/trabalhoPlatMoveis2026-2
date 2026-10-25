@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA">
+
+    <!-- Conteúdo Rolável Principal -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <!-- Fundo Superior Azul -->
+            <View
+                android:id="@+id/headerBg"
+                android:layout_width="0dp"
+                android:layout_height="210dp"
+                android:background="#007BFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Botão Voltar -->
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Título da Tela -->
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="Exercícios disponíveis"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+            <!-- Subtítulo -->
+            <TextView
+                android:id="@+id/txtSub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="4dp"
+                android:text="Veja os exercícios e os equipamentos da academia em tempo real."
+                android:textColor="#E0E0E0"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+            <!-- Barra de Pesquisa e Filtro -->
+            <LinearLayout
+                android:id="@+id/layoutSearchFilter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSub">
+
+                <!-- Campo de Pesquisa -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_rounded"
+                    android:backgroundTint="@android:color/white"
+                    android:elevation="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@android:drawable/ic_menu_search"
+                        app:tint="#6C757D" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Buscar exercício ou equipamento..."
+                        android:textColor="#ADB5BD"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Botão Filtros -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:backgroundTint="@android:color/white"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@android:drawable/ic_menu_manage"
+                        app:tint="#0A192F" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Filtros"
+                        android:textColor="#0A192F"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Categorias Horizontais (Design com alta visibilidade para a opção ativa) -->
+            <HorizontalScrollView
+                android:id="@+id/scrollCategories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutSearchFilter">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
+                    <!-- SELECIONADA (Fundo Branco, Texto Azul Escuro e Negrito) -->
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="6dp"
+                        android:backgroundTint="@android:color/white"
+                        android:text="Todos"
+                        android:textAllCaps="false"
+                        android:textColor="#007BFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="16dp" />
+
+                    <!-- NÃO SELECIONADA (Fundo Transparente, Texto Branco) -->
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="3dp"
+                        android:backgroundTint="#00000000"
+                        android:text="Peito"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        app:cornerRadius="16dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="3dp"
+                        android:backgroundTint="#00000000"
+                        android:text="Costas"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        app:cornerRadius="16dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="3dp"
+                        android:backgroundTint="#00000000"
+                        android:text="Pernas"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        app:cornerRadius="16dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="3dp"
+                        android:backgroundTint="#00000000"
+                        android:text="Ombros"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        app:cornerRadius="16dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="3dp"
+                        android:backgroundTint="#00000000"
+                        android:text="Braços"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        app:cornerRadius="16dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="3dp"
+                        android:backgroundTint="#00000000"
+                        android:text="Core"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        app:cornerRadius="16dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- GRELHA DE EXERCÍCIOS (2 Colunas com cartões adaptados) -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="14dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollCategories">
+
+                <!-- Linha 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Cartão 1: Supino reto -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:elevation="2dp"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <!-- Bloco da imagem da máquina (pronto para receber upload do instrutor) -->
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#EBF5FB"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/baseline_fitness_center_24"
+                            app:tint="#007BFF" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Supino reto"
+                            android:textColor="#0A192F"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="Peito"
+                            android:textColor="#6C757D"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#EBF5FB"
+                            android:text="📖 Ver exercício"
+                            android:textAllCaps="false"
+                            android:textColor="#007BFF"
+                            android:textSize="10sp"
+                            app:cornerRadius="6dp" />
+                    </LinearLayout>
+
+                    <!-- Cartão 2: Peck deck -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:elevation="2dp"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#EBF5FB"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/baseline_fitness_center_24"
+                            app:tint="#007BFF" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Peck deck"
+                            android:textColor="#0A192F"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="Peito"
+                            android:textColor="#6C757D"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#EBF5FB"
+                            android:text="📖 Ver exercício"
+                            android:textAllCaps="false"
+                            android:textColor="#007BFF"
+                            android:textSize="10sp"
+                            app:cornerRadius="6dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Linha 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Cartão 3: Puxada alta -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:elevation="2dp"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#E8F8F0"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/baseline_fitness_center_24"
+                            app:tint="#28A745" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Puxada alta"
+                            android:textColor="#0A192F"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="Costas"
+                            android:textColor="#6C757D"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#EBF5FB"
+                            android:text="📖 Ver exercício"
+                            android:textAllCaps="false"
+                            android:textColor="#007BFF"
+                            android:textSize="10sp"
+                            app:cornerRadius="6dp" />
+                    </LinearLayout>
+
+                    <!-- Cartão 4: Remada baixa -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:elevation="2dp"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#E8F8F0"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/baseline_fitness_center_24"
+                            app:tint="#28A745" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Remada baixa"
+                            android:textColor="#0A192F"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="Costas"
+                            android:textColor="#6C757D"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#EBF5FB"
+                            android:text="📖 Ver exercício"
+                            android:textAllCaps="false"
+                            android:textColor="#007BFF"
+                            android:textSize="10sp"
+                            app:cornerRadius="6dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Linha 3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Cartão 5: Leg press -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:elevation="2dp"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#FEF5E7"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/baseline_fitness_center_24"
+                            app:tint="#FD7E14" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Leg press"
+                            android:textColor="#0A192F"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="Pernas"
+                            android:textColor="#6C757D"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#EBF5FB"
+                            android:text="📖 Ver exercício"
+                            android:textAllCaps="false"
+                            android:textColor="#007BFF"
+                            android:textSize="10sp"
+                            app:cornerRadius="6dp" />
+                    </LinearLayout>
+
+                    <!-- Cartão 6: Cadeira extensora -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:elevation="2dp"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#FEF5E7"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/baseline_fitness_center_24"
+                            app:tint="#FD7E14" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Cadeira extensora"
+                            android:textColor="#0A192F"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="Pernas"
+                            android:textColor="#6C757D"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#EBF5FB"
+                            android:text="📖 Ver exercício"
+                            android:textAllCaps="false"
+                            android:textColor="#007BFF"
+                            android:textSize="10sp"
+                            app:cornerRadius="6dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR DO ALUNO (Com 4 itens: Início, Treinos, Social, Perfil - Sem Nutrição) -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- 1. Início -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_bar_chart_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Início" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 2. Treinos (SELECIONADO EM AZUL) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_fitness_center_24" app:tint="#007BFF" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Treinos" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 3. Social -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_groups_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Social" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 4. Perfil -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_person_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Perfil" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

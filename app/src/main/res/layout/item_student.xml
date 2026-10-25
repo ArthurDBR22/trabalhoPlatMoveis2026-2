@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_input_rounded"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:elevation="1dp">
+
+    <!-- Foto do Aluno (Placeholder pronto para receber dados reais) -->
+    <ImageView
+        android:id="@+id/imgStudentPhoto"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_input_rounded"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_groups_24" />
+
+    <!-- Informações do Aluno -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtStudentName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Nome do Aluno"
+                android:textColor="#0A192F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Badge de Status (Ativo / Inativo) -->
+            <TextView
+                android:id="@+id/txtStudentStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_rounded"
+                android:backgroundTint="#E8F8F0"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="Ativo"
+                android:textColor="#28A745"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Detalhes do Treino -->
+        <TextView
+            android:id="@+id/txtStudentWorkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="🏋️ Musculação • Intermediário"
+            android:textColor="#6C757D"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/txtStudentLastDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="📅 Último treino: --/--/----"
+            android:textColor="#6C757D"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <!-- Seta para abrir detalhes -->
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_send"
+        app:tint="#007BFF" />
+
+</LinearLayout>

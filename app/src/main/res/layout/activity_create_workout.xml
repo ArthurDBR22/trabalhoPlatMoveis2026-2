@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA">
+
+    <!-- Conteúdo Rolável Principal -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <!-- Fundo Superior Azul -->
+            <View
+                android:id="@+id/headerBg"
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                android:background="#007BFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Botão Voltar -->
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Título da Tela -->
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Criar / Editar Treino"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+                app:layout_constraintStart_toEndOf="@+id/btnBack"
+                app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+            <!-- Ícones do Topo (Guardar e Mais) -->
+            <ImageView
+                android:id="@+id/btnSaveTop"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_input_rounded"
+                android:backgroundTint="#22FFFFFF"
+                android:padding="8dp"
+                android:src="@drawable/baseline_person_24"
+                app:tint="@android:color/white"
+                app:layout_constraintEnd_toStartOf="@+id/btnMore"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btnMore"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_input_rounded"
+                android:backgroundTint="#22FFFFFF"
+                android:padding="8dp"
+                android:src="@drawable/baseline_star_24"
+                app:tint="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Subtítulo -->
+            <TextView
+                android:id="@+id/txtSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="6dp"
+                android:text="Monte um treino personalizado para seu aluno."
+                android:textColor="#E0E0E0"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+            <!-- Cartão do Aluno Selecionado -->
+            <LinearLayout
+                android:id="@+id/cardSelectedStudent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_input_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSub">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_groups_24" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mariana Costa"
+                        android:textColor="#0A192F"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="22 anos  •  Aluno ativo"
+                        android:textColor="#6C757D"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:backgroundTint="#EBF5FF"
+                    android:text="⇄ Trocar aluno"
+                    android:textAllCaps="false"
+                    android:textColor="#007BFF"
+                    android:textSize="10sp"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+
+            <!-- FORMULÁRIO DE CONFIGURAÇÃO DO TREINO -->
+            <!-- Linha 1: Nome do Treino e Objetivo -->
+            <LinearLayout
+                android:id="@+id/rowForm1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardSelectedStudent">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nome do treino" android:textColor="#0A192F" android:textSize="11sp" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:text="Treino de Pernas A"
+                        android:textColor="#0A192F"
+                        android:textSize="12sp"
+                        android:paddingHorizontal="12dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Objetivo" android:textColor="#0A192F" android:textSize="11sp" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:text="Hipertrofia ⌄"
+                        android:textColor="#0A192F"
+                        android:textSize="12sp"
+                        android:paddingHorizontal="12dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Linha 2: Nível e Duração estimada -->
+            <LinearLayout
+                android:id="@+id/rowForm2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rowForm1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nível" android:textColor="#0A192F" android:textSize="11sp" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:text="Intermediário ⌄"
+                        android:textColor="#0A192F"
+                        android:textSize="12sp"
+                        android:paddingHorizontal="12dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Duração estimada" android:textColor="#0A192F" android:textSize="11sp" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:text="⏱️ ~ 50 min ⌄"
+                        android:textColor="#0A192F"
+                        android:textSize="12sp"
+                        android:paddingHorizontal="12dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Descrição Opcional -->
+            <LinearLayout
+                android:id="@+id/rowForm3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rowForm2">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Descrição (opcional)" android:textColor="#0A192F" android:textSize="11sp" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:text="Foco em membros inferiores, com ênfase em quadríceps e glúteos."
+                    android:textColor="#0A192F"
+                    android:textSize="11sp"
+                    android:paddingHorizontal="12dp"/>
+            </LinearLayout>
+
+            <!-- CABEÇALHO DA LISTA DE EXERCÍCIOS -->
+            <LinearLayout
+                android:id="@+id/headerExercises"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rowForm3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Exercícios (6)"
+                    android:textColor="#0A192F"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:backgroundTint="#007BFF"
+                    android:text="+ Adicionar exercício"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
+                    app:cornerRadius="18dp" />
+            </LinearLayout>
+
+            <!-- RECYCLERVIEW DE EXERCÍCIOS -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerExercises"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_student"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headerExercises" />
+
+            <!-- BOTÕES INFERIORES -->
+            <LinearLayout
+                android:id="@+id/layoutBottomButtons"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerExercises">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:backgroundTint="#EBF5FF"
+                    android:text="👁️ Visualizar treino"
+                    android:textAllCaps="false"
+                    android:textColor="#007BFF"
+                    android:textSize="12sp"
+                    app:cornerRadius="8dp" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1.2"
+                    android:layout_marginStart="6dp"
+                    android:backgroundTint="#007BFF"
+                    android:text="✓ Salvar treino"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR FIXA -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_bar_chart_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Início" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_groups_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Alunos" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Aba Treinos Ativa -->
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_fitness_center_24" app:tint="#007BFF" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Treinos" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_calendar_month_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Agenda" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_person_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Perfil" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
