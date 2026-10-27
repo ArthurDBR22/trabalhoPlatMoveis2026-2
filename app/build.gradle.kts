@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.telacadastro"
+    namespace = "com.example.myapplication"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.example.telacadastro"
-        minSdk = 24
+        applicationId = "com.example.myapplication"
+        minSdk = 36
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
