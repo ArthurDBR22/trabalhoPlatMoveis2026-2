@@ -22,5 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Tela Cadastro"
+rootProject.name = "My Application"
 include(":app")
+ 
