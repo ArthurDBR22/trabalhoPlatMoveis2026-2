@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,10 @@ class WorkoutInProgressActivity : AppCompatActivity() {
                 view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
                 insets
             }
+        }
+
+        findViewById<TextView>(R.id.tvVerTreino)?.setOnClickListener {
+            startActivity(Intent(this, CustomWorkoutActivity::class.java))
         }
 
         findViewById<ImageView>(R.id.ivBack)?.setOnClickListener {

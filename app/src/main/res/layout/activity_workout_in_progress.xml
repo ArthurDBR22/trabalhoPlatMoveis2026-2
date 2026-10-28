@@ -181,6 +181,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/tvVerTreino"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#F5F9FF"
@@ -188,6 +189,7 @@
                             android:paddingTop="6dp"
                             android:paddingEnd="12dp"
                             android:paddingBottom="6dp">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

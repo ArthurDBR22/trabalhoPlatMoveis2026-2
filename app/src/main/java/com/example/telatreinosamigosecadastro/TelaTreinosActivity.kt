@@ -41,7 +41,8 @@ class TelaTreinosActivity : AppCompatActivity() {
         val btnVerHistorico = findViewById<Button>(R.id.btnVerHistorico)
 
         val cardExercicios = findViewById<CardView>(R.id.cardExercicios)
-        val cardCriarTreino = findViewById<CardView>(R.id.cardCriarTreino)
+        val cardExerciciosAcademia = findViewById<CardView>(R.id.cardExerciciosAcademia)
+        val cardCriarTreino = findViewById<CardView>(R.id.cardTreinoPersonalizado)
         val cardCronometro = findViewById<CardView>(R.id.cardCronometro)
         val cardHistorico = findViewById<CardView>(R.id.cardHistorico)
 
@@ -51,6 +52,7 @@ class TelaTreinosActivity : AppCompatActivity() {
         val openHistorico = { startActivity(Intent(this, HistoryActivity::class.java)) }
 
         cardExercicios?.setOnClickListener { openExercicios() }
+        cardExerciciosAcademia?.setOnClickListener { openExercicios() }
         btnVerExercicios?.setOnClickListener { openExercicios() }
         btnAcessarExercicios?.setOnClickListener { openExercicios() }
 
