@@ -27,7 +27,7 @@ class WorkoutInProgressActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<TextView>(R.id.tvVerTreino)?.setOnClickListener {
+        findViewById<LinearLayout>(R.id.tvVerTreino)?.setOnClickListener {
             startActivity(Intent(this, CustomWorkoutActivity::class.java))
         }
 
