@@ -12,21 +12,44 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".LoginActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WorkoutInProgressActivity" />
-        <activity android:name=".SplashActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".InitialActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".PasswordRecoveryActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".CustomWorkoutActivity" />
+
+        <activity android:name="com.example.telacadastro.CadastroActivity" />
+        <activity android:name="com.example.telacadastro.CreateWorkoutActivity" />
+        <activity android:name="com.example.telacadastro.InstrutorActivity" />
+        <activity android:name="com.example.telacadastro.InstructorHomeActivity" />
+        <activity android:name="com.example.telacadastro.InstructorAgendaActivity" />
+        <activity android:name="com.example.telacadastro.StudentsListActivity" />
+        <activity android:name="com.example.telacadastro.StudentDetailsActivity" />
+        <activity android:name="com.example.telacadastro.StudentExercisesActivity" />
+
+        <activity android:name="com.example.telametaseultimotreino.MainActivity" />
+        <activity android:name="com.example.telametaseultimotreino.MetasAlunoActivity" />
+        <activity android:name="com.example.telametaseultimotreino.UltimoTreinoActivity" />
+
+        <activity android:name="com.example.telasocialepublicacao.SocialActivity" />
+        <activity android:name="com.example.telasocialepublicacao.FeedActivity" />
+
+
+        <activity android:name="com.example.telatreinosamigosecadastro.MainActivity" />
+        <activity android:name="com.example.telatreinosamigosecadastro.DecisaoCadastroActivity" />
+        <activity android:name="com.example.telatreinosamigosecadastro.TelaTreinosActivity" />
+        <activity android:name="com.example.telatreinosamigosecadastro.AdicionarAmigosActivity" />
+        <activity android:name="com.example.telatreinosamigosecadastro.MeusAmigosActivity" />
 
     </application>
 

@@ -1,5 +1,7 @@
 package com.example.telasocialepublicacao
 
+import com.example.myapplication.R
+
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -85,19 +87,19 @@ class CriarPublicacaoFragment : Fragment() {
         }
 
         navInicio.setOnClickListener {
-            Toast.makeText(requireContext(), "Tela de Início", Toast.LENGTH_SHORT).show()
+            startActivity(android.content.Intent(requireContext(), com.example.myapplication.CustomWorkoutActivity::class.java))
         }
 
         navTreinos.setOnClickListener {
-            Toast.makeText(requireContext(), "Tela de Treinos", Toast.LENGTH_SHORT).show()
+            startActivity(android.content.Intent(requireContext(), com.example.telatreinosamigosecadastro.TelaTreinosActivity::class.java))
         }
 
         navSocial.setOnClickListener {
-            Toast.makeText(requireContext(), "Você já está na área Social", Toast.LENGTH_SHORT).show()
+            startActivity(android.content.Intent(requireContext(), com.example.telasocialepublicacao.SocialActivity::class.java))
         }
 
         navPerfil.setOnClickListener {
-            Toast.makeText(requireContext(), "Tela de Perfil", Toast.LENGTH_SHORT).show()
+            startActivity(android.content.Intent(requireContext(), com.example.myapplication.HistoryActivity::class.java))
         }
     }
 

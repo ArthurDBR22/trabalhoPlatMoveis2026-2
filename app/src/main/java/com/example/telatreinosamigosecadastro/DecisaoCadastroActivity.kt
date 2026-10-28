@@ -1,5 +1,7 @@
 package com.example.telatreinosamigosecadastro
 
+import com.example.myapplication.R
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -19,15 +21,17 @@ class DecisaoCadastroActivity : AppCompatActivity() {
         var cardInstrutor = findViewById<LinearLayout>(R.id.cardInstrutor)
         var btnContinuarInstrutor = findViewById<Button>(R.id.btnContinuarInstrutor)
 
-        var acaoEstudante = {
+        val acaoEstudante = {
             Toast.makeText(this, "Iniciando cadastro como Estudante...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, com.example.telacadastro.CadastroActivity::class.java))
         }
 
         btnContinuarEstudante.setOnClickListener { acaoEstudante() }
         cardEstudante.setOnClickListener { acaoEstudante() }
 
-        var acaoInstrutor = {
+        val acaoInstrutor = {
             Toast.makeText(this, "Iniciando cadastro como Instrutor...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, com.example.telacadastro.InstrutorActivity::class.java))
         }
 
         btnContinuarInstrutor.setOnClickListener { acaoInstrutor() }

@@ -1,5 +1,7 @@
 package com.example.telatreinosamigosecadastro
 
+import com.example.myapplication.R
+
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context

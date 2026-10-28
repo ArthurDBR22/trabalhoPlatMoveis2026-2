@@ -1,5 +1,7 @@
 package com.example.telasocialepublicacao
 
+import com.example.myapplication.R
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

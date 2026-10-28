@@ -53,9 +53,26 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (user == "admin" && pass == "admin") {
-                startActivity(Intent(this, CustomWorkoutActivity::class.java))
-                finishAffinity()
+            if (user == "admin" || user == "professor") {
+                if (pass == "admin" || pass == "professor") {
+                    Toast.makeText(this, "Login de Professor realizado com sucesso!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, com.example.telacadastro.InstructorHomeActivity::class.java))
+                    finishAffinity()
+                } else {
+                    llUserInput.setBackgroundResource(R.drawable.bg_edittext_error)
+                    llPassInput.setBackgroundResource(R.drawable.bg_edittext_error)
+                    llError.visibility = View.VISIBLE
+                }
+            } else if (user == "aluno" || user.isNotBlank()) {
+                if (pass == "aluno" || pass.isNotBlank()) {
+                    Toast.makeText(this, "Login de Aluno realizado com sucesso!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, com.example.telasocialepublicacao.SocialActivity::class.java))
+                    finishAffinity()
+                } else {
+                    llUserInput.setBackgroundResource(R.drawable.bg_edittext_error)
+                    llPassInput.setBackgroundResource(R.drawable.bg_edittext_error)
+                    llError.visibility = View.VISIBLE
+                }
             } else {
                 llUserInput.setBackgroundResource(R.drawable.bg_edittext_error)
                 llPassInput.setBackgroundResource(R.drawable.bg_edittext_error)

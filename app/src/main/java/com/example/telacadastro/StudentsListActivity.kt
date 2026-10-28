@@ -1,5 +1,7 @@
 package com.example.telacadastro
 
+import com.example.myapplication.R
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager

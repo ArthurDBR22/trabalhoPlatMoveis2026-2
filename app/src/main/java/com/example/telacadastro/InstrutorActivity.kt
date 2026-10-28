@@ -1,5 +1,7 @@
 package com.example.telacadastro
 
+import com.example.myapplication.R
+
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -18,6 +20,12 @@ class InstrutorActivity : AppCompatActivity() {
         val edtPassword = findViewById<EditText>(R.id.edtPassword)
         val edtConfirmPassword = findViewById<EditText>(R.id.edtConfirmPassword)
         val layoutErrorBanner = findViewById<View>(R.id.layoutErrorBanner)
+        val txtLoginRedirect = findViewById<View>(R.id.txtLoginRedirect)
+
+        txtLoginRedirect.setOnClickListener {
+            startActivity(android.content.Intent(this, com.example.myapplication.LoginActivity::class.java))
+            finish()
+        }
 
         btnRegister.setOnClickListener {
             val name = edtName.text.toString().trim()
@@ -50,6 +58,10 @@ class InstrutorActivity : AppCompatActivity() {
                 edtUser.setBackgroundResource(normalBg)
                 edtPassword.setBackgroundResource(normalBg)
                 edtConfirmPassword.setBackgroundResource(normalBg)
+
+                android.widget.Toast.makeText(this, "Cadastro de Instrutor realizado com sucesso!", android.widget.Toast.LENGTH_SHORT).show()
+                startActivity(android.content.Intent(this, InstructorHomeActivity::class.java))
+                finishAffinity()
             }
         }
     }

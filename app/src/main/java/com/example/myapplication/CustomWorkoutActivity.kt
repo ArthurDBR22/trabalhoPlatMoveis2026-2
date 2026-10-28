@@ -56,6 +56,7 @@ class CustomWorkoutActivity : AppCompatActivity() {
         }
         findViewById<android.view.View>(R.id.btnEditWorkout).setOnClickListener {
             Toast.makeText(this, "Acesso à edição de treino.", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, com.example.telacadastro.CreateWorkoutActivity::class.java))
         }
         findViewById<android.view.View>(R.id.btnStartWorkout).setOnClickListener {
             startActivity(Intent(this, WorkoutInProgressActivity::class.java))

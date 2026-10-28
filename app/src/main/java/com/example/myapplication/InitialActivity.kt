@@ -14,7 +14,7 @@ class InitialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_initial)
 
         findViewById<Button>(R.id.btnCadastrar).setOnClickListener {
-
+            startActivity(Intent(this, com.example.telatreinosamigosecadastro.DecisaoCadastroActivity::class.java))
         }
 
         findViewById<Button>(R.id.btnEntrar).setOnClickListener {

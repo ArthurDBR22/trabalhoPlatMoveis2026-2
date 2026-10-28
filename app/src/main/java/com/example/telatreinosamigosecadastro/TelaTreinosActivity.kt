@@ -1,5 +1,7 @@
 package com.example.telatreinosamigosecadastro
 
+import com.example.myapplication.R
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
