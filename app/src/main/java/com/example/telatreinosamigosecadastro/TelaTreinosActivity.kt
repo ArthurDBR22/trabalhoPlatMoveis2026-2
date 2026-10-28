@@ -1,14 +1,21 @@
 package com.example.telatreinosamigosecadastro
 
 import com.example.myapplication.R
+import com.example.myapplication.CustomWorkoutActivity
+import com.example.myapplication.HistoryActivity
+import com.example.myapplication.WorkoutInProgressActivity
+import com.example.telacadastro.CreateWorkoutActivity
+import com.example.telacadastro.StudentExercisesActivity
+import com.example.telasocialepublicacao.SocialActivity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class TelaTreinosActivity : AppCompatActivity() {
 
@@ -16,7 +23,6 @@ class TelaTreinosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_treinos)
 
-        // 1. Interações do Cabeçalho Superior[cite: 1]
         val btnNotificacao = findViewById<ImageButton>(R.id.btnNotificacao)
         val btnConfiguracoes = findViewById<ImageButton>(R.id.btnConfiguracoes)
 
@@ -28,51 +34,60 @@ class TelaTreinosActivity : AppCompatActivity() {
             Toast.makeText(this, "Configurações clicadas", Toast.LENGTH_SHORT).show()
         }
 
-        var btnVerExercicios = findViewById<Button>(R.id.btnVerExercicios)
-        var btnAcessarExercicios = findViewById<Button>(R.id.btnAcessarExercicios)
-        var btnCriarTreino = findViewById<Button>(R.id.btnCriarTreino)
-        var btnVerCronometro = findViewById<Button>(R.id.btnVerCronometro)
-        var btnVerHistorico = findViewById<Button>(R.id.btnVerHistorico)
+        val btnVerExercicios = findViewById<Button>(R.id.btnVerExercicios)
+        val btnAcessarExercicios = findViewById<Button>(R.id.btnAcessarExercicios)
+        val btnCriarTreino = findViewById<Button>(R.id.btnCriarTreino)
+        val btnVerCronometro = findViewById<Button>(R.id.btnVerCronometro)
+        val btnVerHistorico = findViewById<Button>(R.id.btnVerHistorico)
 
-        btnVerExercicios.setOnClickListener {
-            Toast.makeText(this, "Abrindo biblioteca de exercícios...", Toast.LENGTH_SHORT).show()
-        }
+        val cardExercicios = findViewById<CardView>(R.id.cardExercicios)
+        val cardCriarTreino = findViewById<CardView>(R.id.cardCriarTreino)
+        val cardCronometro = findViewById<CardView>(R.id.cardCronometro)
+        val cardHistorico = findViewById<CardView>(R.id.cardHistorico)
 
-        btnAcessarExercicios.setOnClickListener {
-            Toast.makeText(this, "Abrindo exercícios da academia...", Toast.LENGTH_SHORT).show()
-        }
+        val openExercicios = { startActivity(Intent(this, StudentExercisesActivity::class.java)) }
+        val openCriarTreino = { startActivity(Intent(this, CreateWorkoutActivity::class.java)) }
+        val openCronometro = { startActivity(Intent(this, WorkoutInProgressActivity::class.java)) }
+        val openHistorico = { startActivity(Intent(this, HistoryActivity::class.java)) }
 
-        btnCriarTreino.setOnClickListener {
-            Toast.makeText(this, "Abrindo criação de treino personalizado...", Toast.LENGTH_SHORT).show()
-        }
+        cardExercicios?.setOnClickListener { openExercicios() }
+        btnVerExercicios?.setOnClickListener { openExercicios() }
+        btnAcessarExercicios?.setOnClickListener { openExercicios() }
 
-        btnVerCronometro.setOnClickListener {
-            Toast.makeText(this, "Abrindo cronômetro...", Toast.LENGTH_SHORT).show()
-        }
+        cardCriarTreino?.setOnClickListener { openCriarTreino() }
+        btnCriarTreino?.setOnClickListener { openCriarTreino() }
 
-        btnVerHistorico.setOnClickListener {
-            Toast.makeText(this, "Abrindo histórico de treinos...", Toast.LENGTH_SHORT).show()
-        }
+        cardCronometro?.setOnClickListener { openCronometro() }
+        btnVerCronometro?.setOnClickListener { openCronometro() }
 
-        var navInicio = findViewById<LinearLayout>(R.id.navInicio)
-        var navTreinos = findViewById<LinearLayout>(R.id.navTreinos)
-        var navSocial = findViewById<LinearLayout>(R.id.navSocial)
-        var navPerfil = findViewById<LinearLayout>(R.id.navPerfil)
+        cardHistorico?.setOnClickListener { openHistorico() }
+        btnVerHistorico?.setOnClickListener { openHistorico() }
 
-        navInicio.setOnClickListener {
-            Toast.makeText(this, "Navegando para Início", Toast.LENGTH_SHORT).show()
-        }
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_workout
 
-        navTreinos.setOnClickListener {
-            Toast.makeText(this, "Você já está na tela de Treinos", Toast.LENGTH_SHORT).show()
-        }
-
-        navSocial.setOnClickListener {
-            Toast.makeText(this, "Navegando para Social", Toast.LENGTH_SHORT).show()
-        }
-
-        navPerfil.setOnClickListener {
-            Toast.makeText(this, "Navegando para Perfil", Toast.LENGTH_SHORT).show()
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, CustomWorkoutActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_workout -> {
+                    true
+                }
+                R.id.nav_social -> {
+                    startActivity(Intent(this, SocialActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                    finish()
+                    true
+                }
+                else -> false
+            }
         }
     }
 }

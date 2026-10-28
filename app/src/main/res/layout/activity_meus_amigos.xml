@@ -370,12 +370,6 @@
                                 android:textStyle="bold"
                                 android:layout_marginEnd="12dp" />
 
-                            <ImageButton
-                                android:id="@+id/btnChatMariana"
-                                android:layout_width="38dp"
-                                android:layout_height="38dp"
-                                android:background="@drawable/icone_bate_papo"
-                                android:contentDescription="Bate-papo" />
                         </LinearLayout>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -455,13 +449,6 @@
                                 android:textStyle="bold"
                                 android:layout_marginEnd="12dp" />
 
-                            <ImageButton
-                                android:id="@+id/btnChatRafael"
-                                android:layout_width="38dp"
-                                android:layout_height="38dp"
-                                android:background="@drawable/icone_bate_papo"
-                                android:contentDescription="Bate-papo"
-                                app:tint="#0066FF" />
                         </LinearLayout>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>

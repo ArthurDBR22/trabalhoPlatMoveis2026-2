@@ -72,16 +72,7 @@ class MeusAmigosActivity : AppCompatActivity() {
             Toast.makeText(this, "Exibindo amigos online", Toast.LENGTH_SHORT).show()
         }
 
-        var btnChatMariana = findViewById<ImageButton>(R.id.btnChatMariana)
-        var btnChatRafael = findViewById<ImageButton>(R.id.btnChatRafael)
 
-        btnChatMariana.setOnClickListener {
-            Toast.makeText(this, "Abrindo chat com Mariana Costa...", Toast.LENGTH_SHORT).show()
-        }
-
-        btnChatRafael.setOnClickListener {
-            Toast.makeText(this, "Abrindo chat com Rafael Silva...", Toast.LENGTH_SHORT).show()
-        }
 
         var navInicio = findViewById<LinearLayout>(R.id.navInicio)
         var navTreinos = findViewById<LinearLayout>(R.id.navTreinos)
