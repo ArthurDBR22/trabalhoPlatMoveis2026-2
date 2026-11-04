@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="112dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="9dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/fundo_item_exercicio">
+
+    <!-- NÚMERO CIRCULAR -->
+    <TextView
+        android:id="@+id/txtNumero"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:gravity="center"
+        android:text="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#142F80"
+        android:background="@drawable/fundo_numero_circular"/>
+
+    <!-- IMAGEM DO EXERCÍCIO -->
+    <ImageView
+        android:id="@+id/imgExercicio"
+        android:layout_width="95dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagem do exercício"/>
+
+    <!-- INFORMAÇÕES -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="9dp">
+
+        <TextView
+            android:id="@+id/txtNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Supino reto"
+            android:textColor="#102E91"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtGrupo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Peito"
+            android:textColor="#687DA3"
+            android:textSize="12sp"/>
+
+        <!-- SÉRIES COM IMAGEM -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:id="@+id/imgSeries"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_peso"
+                android:scaleType="fitCenter"
+                android:contentDescription="Ícone de séries"/>
+
+            <TextView
+                android:id="@+id/txtSeries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="4 séries"
+                android:textColor="#64799F"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <!-- REPETIÇÕES SOMENTE COM TEXTO -->
+        <TextView
+            android:id="@+id/txtRepeticoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10 a 12 repetições"
+            android:textColor="#64799F"
+            android:textSize="11sp"/>
+
+    </LinearLayout>
+
+    <!-- SETA PARA DETALHES -->
+    <TextView
+        android:id="@+id/btnDetalhar"
+        android:layout_width="22dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="›"
+        android:textSize="27sp"
+        android:textColor="#0878E8"
+        android:clickable="true"
+        android:focusable="true"/>
+
+</LinearLayout>

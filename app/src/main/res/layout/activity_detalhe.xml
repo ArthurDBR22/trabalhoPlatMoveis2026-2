@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F8FF"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- CABEÇALHO -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="365dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/fundo_azul"
+                android:scaleType="centerCrop"
+                android:contentDescription="Fundo azul"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="18dp">
+
+                <!-- BOTÃO VOLTAR -->
+                <TextView
+                    android:id="@+id/btnVoltar"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:text="‹"
+                    android:textSize="38sp"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Voltar"/>
+
+                <!-- FOTO DO EXERCÍCIO COM BORDA BRANCA -->
+                <FrameLayout
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_foto_exercicio"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgDetalheExercicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_foto_interno"
+                        android:src="@drawable/supino_reto"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"
+                        android:contentDescription="Imagem do exercício"/>
+
+                </FrameLayout>
+
+                <!-- NOME -->
+                <TextView
+                    android:id="@+id/txtDetalheNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text="Supino reto"
+                    android:textColor="#FFFFFF"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
+
+                <!-- DESCRIÇÃO -->
+                <TextView
+                    android:id="@+id/txtDescricaoExercicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Exercício para fortalecimento muscular."
+                    android:textColor="#EAF4FF"
+                    android:textSize="13sp"
+                    android:gravity="center"/>
+
+                <!-- TAGS DOS MÚSCULOS -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtMusculoTag1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/bg_tag_musculo"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:text="Peitoral"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"/>
+
+                    <TextView
+                        android:id="@+id/txtMusculoTag2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/bg_tag_musculo"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:text="Tríceps"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"/>
+
+                    <TextView
+                        android:id="@+id/txtMusculoTag3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/bg_tag_musculo"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:text="Ombros"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"/>
+
+                    <TextView
+                        android:id="@+id/txtMusculoTag4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_tag_musculo"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:text="Superior"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="-5dp">
+
+            <!-- EQUIPAMENTO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="13dp"
+                android:background="@drawable/bg_nivel">
+
+                <ImageView
+                    android:id="@+id/imgIconeEquipamento"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/ic_peso"
+                    android:contentDescription="Equipamento"/>
+
+                <TextView
+                    android:id="@+id/txtEquipamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Equipamento: Barra e anilhas"
+                    android:textColor="#174A83"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <!-- OBJETIVO E NÍVEL -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:padding="15dp"
+                android:background="@drawable/bg_nivel"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/imgIconeObjetivo"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@drawable/ob_azul"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Objetivo"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Objetivo"
+                        android:textColor="#087CF5"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txtObjetivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fortalecer os músculos."
+                        android:textColor="#526DAB"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="45dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="#C8DDF5"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imgIconeNivel"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_nivel"
+                        android:contentDescription="Nível"/>
+
+                    <TextView
+                        android:id="@+id/txtNivel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Intermediário"
+                        android:textColor="#174A83"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ESTATÍSTICAS -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Informações do treino"
+                android:textColor="#174A83"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <!-- SÉRIES -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_nivel"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/imgIconeSeries"
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:src="@drawable/ic_series"
+                        android:contentDescription="Séries"/>
+
+                    <TextView
+                        android:id="@+id/txtDetalheSeries"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="4"
+                        android:textColor="#087CF5"
+                        android:textSize="19sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Séries"
+                        android:textColor="#526DAB"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <!-- REPETIÇÕES -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="3dp"
+                    android:background="@drawable/bg_nivel"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/imgIconeRepeticoes"
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:src="@drawable/ic_repeticoes"
+                        android:contentDescription="Repetições"/>
+
+                    <TextView
+                        android:id="@+id/txtDetalheRepeticoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="10 a 12"
+                        android:textColor="#087CF5"
+                        android:textSize="19sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Repetições"
+                        android:textColor="#526DAB"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <!-- DESCANSO -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="3dp"
+                    android:background="@drawable/bg_nivel"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/imgIconeDescanso"
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:src="@drawable/ic_descanso"
+                        android:contentDescription="Descanso"/>
+
+                    <TextView
+                        android:id="@+id/txtDescanso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="60s"
+                        android:textColor="#087CF5"
+                        android:textSize="19sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Descanso"
+                        android:textColor="#526DAB"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <!-- DURAÇÃO -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_nivel"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/imgIconeDuracao"
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:src="@drawable/ic_duracao"
+                        android:contentDescription="Duração"/>
+
+                    <TextView
+                        android:id="@+id/txtDuracao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="10min"
+                        android:textColor="#087CF5"
+                        android:textSize="19sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Duração"
+                        android:textColor="#526DAB"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- COMO FAZER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/imgIconeInstrucao"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icone_dica"
+                    android:contentDescription="Instruções"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Como fazer"
+                    android:textColor="#174A83"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/txtDetalheInstrucao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:background="@drawable/bg_nivel"/>
+
+            <!-- DICAS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/imgIconeDicas"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/ic_dicas"
+                    android:contentDescription="Dicas"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Dicas importantes"
+                    android:textColor="#174A83"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtDicas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:padding="16dp"
+                android:background="@drawable/bg_nivel"
+                android:text="Mantenha a postura correta durante o exercício."
+                android:textColor="#526DAB"
+                android:textSize="13sp"
+                android:lineSpacingExtra="5dp"/>
+
+            <!-- MÚSCULOS TRABALHADOS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/imgIconeMusculos"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/ob_azul"
+                    android:contentDescription="Músculos"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Músculos trabalhados"
+                    android:textColor="#174A83"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <!-- IMAGENS DOS MÚSCULOS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/bg_nivel"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/imgMusculo1"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/musculo_1"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Músculo 1"/>
+
+                <ImageView
+                    android:id="@+id/imgMusculo2"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/musculo_2"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Músculo 2"/>
+
+                <ImageView
+                    android:id="@+id/imgMusculo3"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/musculo_3"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Músculo 3"/>
+
+                <ImageView
+                    android:id="@+id/imgMusculo4"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/musculo_4"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Músculo 4"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtMusculosTrabalhados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="14dp"
+                android:background="@drawable/bg_nivel"
+                android:text="Peitoral • Tríceps • Ombros"
+                android:textColor="#526DAB"
+                android:textSize="13sp"
+                android:gravity="center"/>
+
+            <!-- ESPAÇO FINAL -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

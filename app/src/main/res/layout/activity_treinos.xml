@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F9FD">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- CABEÇALHO UNIFIT -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:background="@drawable/fundo_azul"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgLogoUniFit"
+                        android:layout_width="155dp"
+                        android:layout_height="52dp"
+                        android:src="@drawable/logo_unifit"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Logo UniFit"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Mais saúde, mais movimento."
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- CONTEÚDO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- TÍTULO E SELETOR -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/spinnerTreino"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Meus Exercícios"
+                            android:textColor="#102E91"
+                            android:textSize="25sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Aqui estão todos os exercícios do seu treino. Continue focado nos seus objetivos!"
+                            android:textColor="#66799E"
+                            android:textSize="13sp"/>
+
+                    </LinearLayout>
+
+                    <Spinner
+                        android:id="@+id/spinnerTreino"
+                        android:layout_width="105dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/fundo_item_exercicio"/>
+
+                </RelativeLayout>
+
+                <!-- FILTROS -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="15dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/containerFiltros"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"/>
+
+                </HorizontalScrollView>
+
+                <!-- LISTA DE EXERCÍCIOS -->
+                <LinearLayout
+                    android:id="@+id/containerExercicios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"/>
+
+                <!-- DICA DO DIA -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="105dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/fundo_dica">
+
+                    <!-- ÍCONE DA DICA -->
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:src="@drawable/icone_dica"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Ícone Dica do dia"/>
+
+                    <!-- TEXTO DA DICA -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="9dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dica do dia"
+                            android:textColor="#12358E"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mantenha a postura correta e respeite seu tempo de descanso."
+                            android:textColor="#657CA5"
+                            android:textSize="11sp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- INICIAR TREINO -->
+                <Button
+                    android:id="@+id/btnIniciarTreino"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="16dp"
+                    android:text="▶  Iniciar treino"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/fundo_botao_iniciar"
+                    android:backgroundTint="@null"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- BARRA INFERIOR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:elevation="8dp">
+
+        <!-- INÍCIO -->
+        <LinearLayout
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconInicio"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:src="@drawable/inicio_cinza"
+                android:scaleType="fitCenter"
+                android:contentDescription="Ícone Início"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Início"
+                android:textSize="12sp"
+                android:textColor="#7B83A5"/>
+
+        </LinearLayout>
+
+        <!-- TREINOS -->
+        <LinearLayout
+            android:id="@+id/navTreinos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconTreinos"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:src="@drawable/treino_azul"
+                android:scaleType="fitCenter"
+                android:contentDescription="Ícone Treinos"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Treinos"
+                android:textSize="12sp"
+                android:textColor="#0878E8"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <!-- SOCIAL -->
+        <LinearLayout
+            android:id="@+id/navSocial"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconSocial"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:src="@drawable/social_cinza"
+                android:scaleType="fitCenter"
+                android:contentDescription="Ícone Social"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Social"
+                android:textSize="12sp"
+                android:textColor="#7B83A5"/>
+
+        </LinearLayout>
+
+        <!-- PERFIL -->
+        <LinearLayout
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconPerfil"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:src="@drawable/perfil_cinza"
+                android:scaleType="fitCenter"
+                android:contentDescription="Ícone Perfil"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perfil"
+                android:textSize="12sp"
+                android:textColor="#7B83A5"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
