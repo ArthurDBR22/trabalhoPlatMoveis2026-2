@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9FF"
+    tools:context=".StudentProfileActivity">
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Blue Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/bg_header_gradient"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Meu Perfil"
+                    android:textColor="@android:color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="Aqui você encontra e ajusta suas informações, objetivos e preferências."
+                    android:textColor="#E0E0E0"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <!-- Main Container Padding -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="-20dp">
+
+                <!-- Profile Info Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    android:background="@android:color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:background="@drawable/card_perfil_redondo"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/foto_perfil" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="14dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="João Silva"
+                                android:textColor="#0A192F"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="joao silva"
+                                android:textColor="#6C757D"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Disciplina hoje, resultados amanhã."
+                                android:textColor="#6C757D"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <!-- Level Badge -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#EBF5FB"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="8dp"
+                            android:text="Nível\nIntermediário"
+                            android:textAlignment="center"
+                            android:textColor="#007BFF"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- 4 Stats Cards Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treinos\nrealizados" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="2dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dias\nconsecutivos" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="2dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Conquistas\nalcançadas" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="85%" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Frequência\nmédia treinos" android:textAlignment="center" android:textColor="#6C757D" android:textSize="8sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Personal Info Section -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Informações pessoais"
+                                android:textColor="#0A192F"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/btnEditPersonalInfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:background="@drawable/bg_input_rounded"
+                                android:backgroundTint="#EBF5FB"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp"
+                                android:text="Editar"
+                                android:textColor="#007BFF"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <!-- Rows -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="4dp"><TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Nome" android:textColor="#6C757D" android:textSize="13sp"/><EditText android:id="@+id/edtProfileName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@null" android:enabled="false" android:focusable="false" android:focusableInTouchMode="false" android:text="João Silva" android:textColor="#007BFF" android:textSize="13sp" android:textStyle="bold"/></LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="4dp"><TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="E-mail" android:textColor="#6C757D" android:textSize="13sp"/><EditText android:id="@+id/edtProfileEmail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@null" android:enabled="false" android:focusable="false" android:focusableInTouchMode="false" android:text="joao.silva@email.com" android:textColor="#007BFF" android:textSize="13sp" android:textStyle="bold"/></LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="4dp"><TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Data de nascimento" android:textColor="#6C757D" android:textSize="13sp"/><EditText android:id="@+id/edtProfileDob" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@null" android:enabled="false" android:focusable="false" android:focusableInTouchMode="false" android:text="12/05/2005" android:textColor="#007BFF" android:textSize="13sp" android:textStyle="bold"/></LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="4dp"><TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Gênero" android:textColor="#6C757D" android:textSize="13sp"/><EditText android:id="@+id/edtProfileGender" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@null" android:enabled="false" android:focusable="false" android:focusableInTouchMode="false" android:text="Masculino" android:textColor="#007BFF" android:textSize="13sp" android:textStyle="bold"/></LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="4dp"><TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Altura" android:textColor="#6C757D" android:textSize="13sp"/><EditText android:id="@+id/edtProfileHeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@null" android:enabled="false" android:focusable="false" android:focusableInTouchMode="false" android:text="1,78 m" android:textColor="#007BFF" android:textSize="13sp" android:textStyle="bold"/></LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="4dp"><TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Peso" android:textColor="#6C757D" android:textSize="13sp"/><EditText android:id="@+id/edtProfileWeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@null" android:enabled="false" android:focusable="false" android:focusableInTouchMode="false" android:text="72 kg" android:textColor="#007BFF" android:textSize="13sp" android:textStyle="bold"/></LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Workout Objective Section -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Objetivo do treino"
+                            android:textColor="#6C757D"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Hipertrofia"
+                            android:textColor="#0A192F"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Aumentar a massa muscular e melhorar o condicionamento físico."
+                            android:textColor="#6C757D"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Preferences Section -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Preferências"
+                                android:textColor="#0A192F"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/btnEditPreferences"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:background="@drawable/bg_input_rounded"
+                                android:backgroundTint="#EBF5FB"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp"
+                                android:text="Editar"
+                                android:textColor="#007BFF"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dias preferidos" android:textColor="#6C757D" android:textSize="10sp"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Seg, Ter,\nQui, Sex" android:textAlignment="center" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Horário" android:textColor="#6C757D" android:textSize="10sp"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Manhã\ne tarde" android:textAlignment="center" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Equipamentos" android:textColor="#6C757D" android:textSize="10sp"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Academia\ncompleta" android:textAlignment="center" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Foco extra" android:textColor="#6C757D" android:textSize="10sp"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Saúde e\nbem-estar" android:textAlignment="center" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Notifications Section -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Notificações"
+                            android:textColor="#0A192F"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Switch 1 -->
+                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lembretes de treino" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Receba lembretes dos seus treinos." android:textColor="#6C757D" android:textSize="11sp"/>
+                            </LinearLayout>
+                            <Switch android:id="@+id/switch1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
+                        </RelativeLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <!-- Switch 2 -->
+                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch2" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dicas e motivação" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Frases, conteúdos e dicas de treino." android:textColor="#6C757D" android:textSize="11sp"/>
+                            </LinearLayout>
+                            <Switch android:id="@+id/switch2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
+                        </RelativeLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <!-- Switch 3 -->
+                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch3" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Conquistas" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Acompanhe suas metas e evoluções." android:textColor="#6C757D" android:textSize="11sp"/>
+                            </LinearLayout>
+                            <Switch android:id="@+id/switch3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
+                        </RelativeLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+                        <!-- Switch 4 -->
+                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch4" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Novidades" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Atualizações e novos recursos." android:textColor="#6C757D" android:textSize="11sp"/>
+                            </LinearLayout>
+                            <Switch android:id="@+id/switch4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Save Button -->
+                <Button
+                    android:id="@+id/btnSaveProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="#007BFF"
+                    android:text="Salvar alterações"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="16dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_bar_chart_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Início" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navTreinos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_fitness_center_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Treinos" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navSocial"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_groups_24" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Social" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/baseline_star_24" app:tint="#007BFF" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Perfil" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,12 @@
 package com.example.telatreinosamigosecadastro
 
 import com.example.myapplication.R
+import com.example.myapplication.StudentProfileActivity
+import com.example.telasocialepublicacao.SocialActivity
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -18,20 +23,20 @@ class MeusAmigosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meus_amigos)
 
-        var btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
+        val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener {
             finish()
         }
 
-        var btnIrAdicionarAmigo = findViewById<Button>(R.id.btnIrAdicionarAmigo)
+        val btnIrAdicionarAmigo = findViewById<Button>(R.id.btnIrAdicionarAmigo)
         btnIrAdicionarAmigo.setOnClickListener {
-            var intent = Intent(this, AdicionarAmigosActivity::class.java)
+            val intent = Intent(this, AdicionarAmigosActivity::class.java)
             startActivity(intent)
         }
 
-        var tabFiltroTodos = findViewById<TextView>(R.id.tabFiltroTodos)
-        var tabFiltroTreino = findViewById<TextView>(R.id.tabFiltroTreino)
-        var tabFiltroOnline = findViewById<TextView>(R.id.tabFiltroOnline)
+        val tabFiltroTodos = findViewById<TextView>(R.id.tabFiltroTodos)
+        val tabFiltroTreino = findViewById<TextView>(R.id.tabFiltroTreino)
+        val tabFiltroOnline = findViewById<TextView>(R.id.tabFiltroOnline)
 
         tabFiltroTodos.setOnClickListener {
             tabFiltroTodos.setBackgroundResource(R.drawable.bg_filter_active)
@@ -72,27 +77,31 @@ class MeusAmigosActivity : AppCompatActivity() {
             Toast.makeText(this, "Exibindo amigos online", Toast.LENGTH_SHORT).show()
         }
 
+        // Navbar integration
+        val navInicio = findViewById<LinearLayout>(R.id.navInicio)
+        val navTreinos = findViewById<LinearLayout>(R.id.navTreinos)
+        val navSocial = findViewById<LinearLayout>(R.id.navSocial)
+        val navPerfil = findViewById<LinearLayout>(R.id.navPerfil)
 
-
-        var navInicio = findViewById<LinearLayout>(R.id.navInicio)
-        var navTreinos = findViewById<LinearLayout>(R.id.navTreinos)
-        var navSocial = findViewById<LinearLayout>(R.id.navSocial)
-        var navPerfil = findViewById<LinearLayout>(R.id.navPerfil)
-
-        navInicio.setOnClickListener {
-            Toast.makeText(this, "Navegando para Início", Toast.LENGTH_SHORT).show()
+        navInicio?.setOnClickListener {
+            startActivity(Intent(this, TelaTreinosActivity::class.java))
+            finish()
         }
 
-        navTreinos.setOnClickListener {
-            var intent = Intent(this, TelaTreinosActivity::class.java)
+        navTreinos?.setOnClickListener {
+            val intent = Intent(this, TelaTreinosActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        navSocial.setOnClickListener {}
+        navSocial?.setOnClickListener {
+            startActivity(Intent(this, SocialActivity::class.java))
+            finish()
+        }
 
-        navPerfil.setOnClickListener {
-            Toast.makeText(this, "Navegando para Perfil", Toast.LENGTH_SHORT).show()
+        navPerfil?.setOnClickListener {
+            startActivity(Intent(this, StudentProfileActivity::class.java))
+            finish()
         }
     }
 }

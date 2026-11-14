@@ -1,4 +1,4 @@
-package com.example.unifit
+package com.example.myapplication
 
 import android.graphics.Color
 import android.graphics.Typeface
@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.R
 
 class DetalheExercicioActivity : AppCompatActivity() {
 

@@ -28,6 +28,11 @@
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".CustomWorkoutActivity" />
         <activity android:name=".WorkoutInProgressActivity" />
+        <activity android:name=".ConfiguracoesActivity" />
+        <activity android:name=".NotificacoesActivity" />
+        <activity android:name=".ExerciciosActivity" />
+        <activity android:name=".DetalheExercicioActivity" />
+        <activity android:name=".StudentProfileActivity" />
 
 
         <activity android:name="com.example.telacadastro.CadastroActivity" />

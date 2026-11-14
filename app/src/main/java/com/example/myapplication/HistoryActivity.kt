@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +10,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.telatreinosamigosecadastro.TelaTreinosActivity
+import com.example.telasocialepublicacao.SocialActivity
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -41,6 +44,26 @@ class HistoryActivity : AppCompatActivity() {
         rvHistory.adapter = WorkoutHistoryAdapter(historyItems)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.selectedItemId = R.id.nav_workout
+        bottomNav.selectedItemId = R.id.nav_profile
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home, R.id.nav_workout -> {
+                    startActivity(Intent(this, TelaTreinosActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_social -> {
+                    startActivity(Intent(this, SocialActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, StudentProfileActivity::class.java))
+                    finish()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 }

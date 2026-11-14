@@ -1,6 +1,8 @@
 package com.example.telasocialepublicacao
 
 import com.example.myapplication.R
+import com.example.myapplication.StudentProfileActivity
+import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 
 import android.content.Intent
 import android.net.Uri
@@ -75,11 +77,11 @@ class CriarPublicacaoFragment : Fragment() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    startActivity(Intent(requireContext(), com.example.myapplication.CustomWorkoutActivity::class.java))
+                    startActivity(Intent(requireContext(), TelaTreinosActivity::class.java))
                     true
                 }
                 R.id.nav_workout -> {
-                    startActivity(Intent(requireContext(), com.example.telatreinosamigosecadastro.TelaTreinosActivity::class.java))
+                    startActivity(Intent(requireContext(), TelaTreinosActivity::class.java))
                     true
                 }
                 R.id.nav_social -> {
@@ -87,7 +89,7 @@ class CriarPublicacaoFragment : Fragment() {
                     true
                 }
                 R.id.nav_profile -> {
-                    startActivity(Intent(requireContext(), com.example.myapplication.HistoryActivity::class.java))
+                    startActivity(Intent(requireContext(), StudentProfileActivity::class.java))
                     true
                 }
                 else -> false

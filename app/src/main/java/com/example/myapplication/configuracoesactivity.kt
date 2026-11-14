@@ -1,10 +1,11 @@
-package com.example.unifit
+package com.example.myapplication
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.*
 import android.graphics.Color
+import com.example.myapplication.R
 
 class ConfiguracoesActivity : Activity() {
 

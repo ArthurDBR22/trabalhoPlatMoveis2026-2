@@ -227,6 +227,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtActionsTitle">
 
                 <LinearLayout
+                    android:id="@+id/cardAddStudent"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
@@ -239,6 +240,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cardCreateWorkout"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
@@ -251,6 +253,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cardScheduleClass"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
@@ -263,6 +266,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cardViewEvaluations"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
@@ -363,6 +367,7 @@
 
         <!-- Início -->
         <LinearLayout
+            android:id="@+id/navInicio"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -385,6 +390,7 @@
 
         <!-- Alunos -->
         <LinearLayout
+            android:id="@+id/navAlunos"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -406,6 +412,7 @@
 
         <!-- Treinos -->
         <LinearLayout
+            android:id="@+id/navTreinos"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -427,6 +434,7 @@
 
         <!-- Agenda -->
         <LinearLayout
+            android:id="@+id/navAgenda"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -448,6 +456,7 @@
 
         <!-- Perfil -->
         <LinearLayout
+            android:id="@+id/navPerfil"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
