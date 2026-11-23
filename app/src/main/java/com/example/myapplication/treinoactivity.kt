@@ -8,7 +8,7 @@ import android.view.Gravity
 import android.widget.*
 import android.graphics.Color
 import android.content.Intent
-import com.example.myapplication.R
+import com.example.telasocialepublicacao.SocialActivity
 
 // MODELO DOS EXERCÍCIOS
 data class Exercicio(
@@ -148,181 +148,103 @@ class ExerciciosActivity : Activity() {
                     position: Int,
                     id: Long
                 ) {
-
-                    treinoSelecionado = treinos[position]
-
-                    // REINICIAR FILTRO AO TROCAR DE TREINO
-                    filtroSelecionado = "Todos"
-
-                    configurarFiltros()
+                    treinoSelecionado = parent?.getItemAtPosition(position).toString()
                     carregarExercicios()
                 }
 
-                override fun onNothingSelected(
-                    parent: AdapterView<*>?
-                ) {}
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
     }
 
     // CONFIGURAR FILTROS
     private fun configurarFiltros() {
-
         containerFiltros.removeAllViews()
 
         for (categoria in categorias) {
+            val botao = Button(this).apply {
+                text = categoria
+                textSize = 12f
+                isAllCaps = false
+                setPadding(24, 0, 24, 0)
 
-            val botao = TextView(this)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    36.dp()
+                ).apply {
+                    marginEnd = 8.dp()
+                }
 
-            botao.text = categoria
-            botao.textSize = 14f
-            botao.gravity = Gravity.CENTER
-            botao.setPadding(16, 10, 16, 10)
+                if (categoria == filtroSelecionado) {
+                    setBackgroundResource(R.drawable.fundo_filtro_ativo)
+                    setTextColor(Color.WHITE)
+                } else {
+                    setBackgroundResource(R.drawable.fundo_filtro_inativo)
+                    setTextColor(Color.rgb(82, 109, 171))
+                }
 
-            val parametros = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                45.dp()
-            )
-
-            parametros.marginEnd = 7.dp()
-            botao.layoutParams = parametros
-
-            atualizarCorFiltro(botao, categoria)
-
-            botao.setOnClickListener {
-
-                filtroSelecionado = categoria
-
-                configurarFiltros()
-                carregarExercicios()
+                setOnClickListener {
+                    filtroSelecionado = categoria
+                    configurarFiltros()
+                    carregarExercicios()
+                }
             }
-
             containerFiltros.addView(botao)
         }
     }
 
-    // CORES DOS FILTROS
-    private fun atualizarCorFiltro(
-        botao: TextView,
-        categoria: String
-    ) {
-
-        if (categoria == filtroSelecionado) {
-
-            botao.setBackgroundResource(
-                R.drawable.fundo_filtro_ativo
-            )
-
-            botao.setTextColor(Color.WHITE)
-
-        } else {
-
-            botao.setBackgroundResource(
-                R.drawable.fundo_filtro_inativo
-            )
-
-            botao.setTextColor(
-                Color.rgb(20, 47, 128)
-            )
-        }
-    }
-
-    // CARREGAR EXERCÍCIOS DO TREINO SELECIONADO
+    // CARREGAR EXERCÍCIOS
     private fun carregarExercicios() {
-
         containerExercicios.removeAllViews()
 
-        // FILTRAR PELO TREINO
-        val listaDoTreino = exercicios.filter {
-            it.treino == treinoSelecionado
+        val listaFiltrada = exercicios.filter {
+            it.treino == treinoSelecionado &&
+                    (filtroSelecionado == "Todos" || it.grupo.equals(filtroSelecionado, true))
         }
 
-        // FILTRAR PELA CATEGORIA
-        val listaFiltrada = if (filtroSelecionado == "Todos") {
-            listaDoTreino
-        } else {
-            listaDoTreino.filter {
-                it.grupo == filtroSelecionado
-            }
-        }
-
-        // MENSAGEM QUANDO NÃO EXISTIR EXERCÍCIO
         if (listaFiltrada.isEmpty()) {
-
             val mensagem = TextView(this)
-
-            mensagem.text =
-                "Nenhum exercício encontrado nesta categoria."
-
+            mensagem.text = "Nenhum exercício encontrado nesta categoria."
             mensagem.textSize = 14f
             mensagem.setTextColor(Color.GRAY)
             mensagem.gravity = Gravity.CENTER
             mensagem.setPadding(10, 25, 10, 25)
-
             containerExercicios.addView(mensagem)
-
             return
         }
 
-        // MONTAR CARTÕES DOS EXERCÍCIOS
         for ((indice, exercicio) in listaFiltrada.withIndex()) {
-
             val item = LayoutInflater.from(this).inflate(
                 R.layout.item_exercicio,
                 containerExercicios,
                 false
             )
 
-            val numero =
-                item.findViewById<TextView>(R.id.txtNumero)
-
-            val imagem =
-                item.findViewById<ImageView>(R.id.imgExercicio)
-
-            val nome =
-                item.findViewById<TextView>(R.id.txtNome)
-
-            val grupo =
-                item.findViewById<TextView>(R.id.txtGrupo)
-
-            val series =
-                item.findViewById<TextView>(R.id.txtSeries)
-
-            val repeticoes =
-                item.findViewById<TextView>(R.id.txtRepeticoes)
-
-            val btnDetalhar =
-                item.findViewById<TextView>(R.id.btnDetalhar)
+            val numero = item.findViewById<TextView>(R.id.txtNumero)
+            val imagem = item.findViewById<ImageView>(R.id.imgExercicio)
+            val nome = item.findViewById<TextView>(R.id.txtNome)
+            val grupo = item.findViewById<TextView>(R.id.txtGrupo)
+            val series = item.findViewById<TextView>(R.id.txtSeries)
+            val repeticoes = item.findViewById<TextView>(R.id.txtRepeticoes)
+            val btnDetalhar = item.findViewById<TextView>(R.id.btnDetalhar)
 
             numero.text = (indice + 1).toString()
-
             nome.text = exercicio.nome
             grupo.text = exercicio.grupo
             series.text = exercicio.series
             repeticoes.text = exercicio.repeticoes
-
             imagem.setImageResource(exercicio.imagem)
 
-            // ABRIR DETALHES DO EXERCÍCIO
             btnDetalhar.setOnClickListener {
-
-                val intent = Intent(
-                    this@ExerciciosActivity,
-                    DetalheExercicioActivity::class.java
-                )
-
-                intent.putExtra("numero", indice + 1)
-                intent.putExtra("nome", exercicio.nome)
-                intent.putExtra("grupo", exercicio.grupo)
-                intent.putExtra("series", exercicio.series)
-                intent.putExtra("repeticoes", exercicio.repeticoes)
-                intent.putExtra("imagem", exercicio.imagem)
-                intent.putExtra("treino", exercicio.treino)
-
-                intent.putExtra(
-                    "instrucao",
-                    "Realize o exercício com atenção à postura e à execução correta."
-                )
-
+                val intent = Intent(this, DetalheExercicioActivity::class.java).apply {
+                    putExtra("numero", indice + 1)
+                    putExtra("nome", exercicio.nome)
+                    putExtra("grupo", exercicio.grupo)
+                    putExtra("series", exercicio.series)
+                    putExtra("repeticoes", exercicio.repeticoes)
+                    putExtra("imagem", exercicio.imagem)
+                    putExtra("treino", exercicio.treino)
+                    putExtra("instrucao", "Realize o exercício com atenção à postura e à execução correta.")
+                }
                 startActivity(intent)
             }
 
@@ -332,51 +254,36 @@ class ExerciciosActivity : Activity() {
 
     // CONFIGURAR BOTÕES
     private fun configurarBotoes() {
-
-        // INICIAR TREINO
         findViewById<Button>(R.id.btnIniciarTreino)
-            .setOnClickListener {
-
-                Toast.makeText(
-                    this,
-                    "$treinoSelecionado iniciado!",
-                    Toast.LENGTH_SHORT
-                ).show()
+            ?.setOnClickListener {
+                Toast.makeText(this, "$treinoSelecionado iniciado!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, WorkoutInProgressActivity::class.java))
             }
 
-        // NAVEGAÇÃO INFERIOR
         findViewById<LinearLayout>(R.id.navInicio)
-            .setOnClickListener {
-                abrirTela("Início")
+            ?.setOnClickListener {
+                startActivity(Intent(this, StudentHomeActivity::class.java))
+                finish()
             }
 
         findViewById<LinearLayout>(R.id.navTreinos)
-            .setOnClickListener {
-                abrirTela("Treinos")
+            ?.setOnClickListener {
+                // Already here
             }
 
         findViewById<LinearLayout>(R.id.navSocial)
-            .setOnClickListener {
-                abrirTela("Social")
+            ?.setOnClickListener {
+                startActivity(Intent(this, SocialActivity::class.java))
+                finish()
             }
 
         findViewById<LinearLayout>(R.id.navPerfil)
-            .setOnClickListener {
-                abrirTela("Perfil")
+            ?.setOnClickListener {
+                startActivity(Intent(this, StudentProfileActivity::class.java))
+                finish()
             }
     }
 
-    // NAVEGAÇÃO ENTRE TELAS
-    private fun abrirTela(nome: String) {
-
-        Toast.makeText(
-            this,
-            "Abrir tela: $nome",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    // CONVERSÃO DP
     private fun Int.dp(): Int {
         return (this * resources.displayMetrics.density).toInt()
     }

@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9FF"
+    tools:context=".StudentHomeActivity">
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Blue Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="185dp"
+                android:background="@drawable/bg_header_gradient"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true">
+
+                    <TextView
+                        android:id="@+id/txtGreeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Olá, Aluno!"
+                        android:textColor="@android:color/white"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Bora continuar sua evolução?"
+                        android:textColor="#E0E0E0"
+                        android:textSize="13sp" />
+
+                    <!-- Aluno Badge -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="#22FFFFFF"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/baseline_person_24"
+                            app:tint="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="Aluno"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Top Right Icons with Notification Dot -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true">
+
+                    <FrameLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="10dp">
+                        <ImageButton
+                            android:id="@+id/btnNotificacao"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="#22FFFFFF"
+                            android:contentDescription="Notificações"
+                            android:padding="8dp"
+                            android:src="@drawable/baseline_notifications_24"
+                            app:tint="@android:color/white" />
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/bg_status_indicator"
+                            android:backgroundTint="#FF3B30" />
+                    </FrameLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnConfiguracoes"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="#22FFFFFF"
+                        android:contentDescription="Configurações"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_engrenagem"
+                        app:tint="@android:color/white" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Main Container Padding -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="-35dp">
+
+                <!-- Profile Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardProfileSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    android:background="@android:color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!-- Avatar with Camera Badge -->
+                            <FrameLayout
+                                android:id="@+id/flAvatar"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/card_perfil_redondo"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/foto_perfil" />
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_gravity="bottom|end"
+                                    android:background="@drawable/bg_blue_circle"
+                                    android:padding="4dp"
+                                    android:src="@android:drawable/ic_menu_camera"
+                                    app:tint="@android:color/white" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/flAvatar"
+                                android:layout_toStartOf="@id/ivChevron"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="12dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtStudentName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Carregando..."
+                                    android:textColor="#0A192F"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtStudentHandle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="\@aluno"
+                                    android:textColor="#6C757D"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="&quot;Disciplina hoje, resultados amanhã!&quot;"
+                                    android:textColor="#007BFF"
+                                    android:textSize="11sp"
+                                    android:textStyle="italic" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/ivChevron"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#6C757D" />
+                        </RelativeLayout>
+
+                        <!-- Editar perfil Button inside card -->
+                        <Button
+                            android:id="@+id/btnEditProfileCard"
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="12dp"
+                            android:backgroundTint="#EBF5FB"
+                            android:text="✏️ Editar perfil"
+                            android:textAllCaps="false"
+                            android:textColor="#007BFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="19dp" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- 4 Stats Cards Row (Dynamic values) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/baseline_fitness_center_24" app:tint="#007BFF"/>
+                        <TextView android:id="@+id/txtStatTreinos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="treinos realizados" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="2dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/baseline_calendar_month_24" app:tint="#FD7E14"/>
+                        <TextView android:id="@+id/txtStatDias" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="dias consecutivos" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="2dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_trophy" app:tint="#FFC107"/>
+                        <TextView android:id="@+id/txtStatConquistas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="conquistas alcançadas" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@android:color/white"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:elevation="2dp">
+                        <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/baseline_bar_chart_24" app:tint="#28A745"/>
+                        <TextView android:id="@+id/txtStatFreq" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="freq. média de treinos" android:textAlignment="center" android:textColor="#6C757D" android:textSize="8sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Treino do dia Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTreinoDoDia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Treino do dia"
+                                    android:textColor="#0A192F"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Você mais perto do seu objetivo!"
+                                    android:textColor="#6C757D"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/btnVerTodosTreinos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:text="Ver todos >"
+                                android:textColor="#007BFF"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <!-- Workout Detail Inside Card -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="100dp"
+                                android:layout_height="100dp">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bg_input_rounded"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/cadeira_extensora" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="6dp"
+                                    android:background="@drawable/bg_input_rounded"
+                                    android:backgroundTint="#007BFF"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Hoje"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="12dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+                                    <TextView
+                                        android:id="@+id/txtWorkoutTitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Membros inferiores"
+                                        android:textColor="#0A192F"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="6dp"
+                                        android:background="@drawable/bg_input_rounded"
+                                        android:backgroundTint="#EBF5FB"
+                                        android:paddingHorizontal="6dp"
+                                        android:paddingVertical="2dp"
+                                        android:text="Personalizado"
+                                        android:textColor="#007BFF"
+                                        android:textSize="9sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="Foco em pernas e glúteos"
+                                    android:textColor="#6C757D"
+                                    android:textSize="11sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:text="⏱️ Duração: 1h 20min"
+                                    android:textColor="#495057"
+                                    android:textSize="11sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🏋️ Exercícios: 5"
+                                    android:textColor="#495057"
+                                    android:textSize="11sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📊 Nível: Intermediário"
+                                    android:textColor="#495057"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btnIniciarTreinoHoje"
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:backgroundTint="#007BFF"
+                                android:text="▶ Iniciar treino >"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                app:cornerRadius="21dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- 3 Navigation Cards (No Nutrition) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Card 1: Histórico -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardHistorico"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:src="@drawable/baseline_bar_chart_24"
+                                app:tint="#007BFF" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_toStartOf="@id/chevronHist"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Histórico"
+                                        android:textColor="#0A192F"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Acompanhe sua evolução e desempenho."
+                                        android:textColor="#6C757D"
+                                        android:textSize="10sp"
+                                        android:maxLines="2" />
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/chevronHist"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_chevron_right"
+                                    app:tint="#6C757D" />
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Card 2: Social -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardSocial"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:src="@drawable/baseline_groups_24"
+                                app:tint="#007BFF" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_toStartOf="@id/chevronSoc"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Social"
+                                        android:textColor="#0A192F"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Conecte-se com amigos e alunos."
+                                        android:textColor="#6C757D"
+                                        android:textSize="10sp"
+                                        android:maxLines="2" />
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/chevronSoc"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_chevron_right"
+                                    app:tint="#6C757D" />
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!-- Row 2 (Single Card: Meus treinos) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Card 3: Meus treinos -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardMeusTreinos"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:src="@drawable/baseline_fitness_center_24"
+                                app:tint="#007BFF" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_toStartOf="@id/chevronTrain"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Meus treinos"
+                                        android:textColor="#0A192F"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Acesse suas fichas personalizadas."
+                                        android:textColor="#6C757D"
+                                        android:textSize="10sp"
+                                        android:maxLines="2" />
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/chevronTrain"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_chevron_right"
+                                    app:tint="#6C757D" />
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar (4 tabs matching image without nutrition: Início, Treinos, Social, Perfil) -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_home" app:tint="#007BFF" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Início" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navTreinos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_dumbbell" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Treinos" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navSocial"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_people" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Social" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_person" app:tint="#6C757D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Perfil" android:textColor="#6C757D" android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.telacadastro
 
 import com.example.myapplication.R
+import com.example.myapplication.StudentHomeActivity
 
 import android.os.Bundle
 import android.view.View
@@ -65,7 +66,7 @@ class CadastroActivity : AppCompatActivity() {
                 edtConfirmPassword.setBackgroundResource(normalBg)
 
                 android.widget.Toast.makeText(this, "Cadastro realizado com sucesso!", android.widget.Toast.LENGTH_SHORT).show()
-                startActivity(android.content.Intent(this, com.example.myapplication.CustomWorkoutActivity::class.java))
+                startActivity(android.content.Intent(this, StudentHomeActivity::class.java))
                 finishAffinity()
             }
         }

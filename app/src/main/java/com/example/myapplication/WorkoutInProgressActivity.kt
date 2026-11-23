@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.telasocialepublicacao.SocialActivity
-import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 
 class WorkoutInProgressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,11 +58,15 @@ class WorkoutInProgressActivity : AppCompatActivity() {
             nav.setOnItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.nav_home -> {
-                        startActivity(Intent(this, TelaTreinosActivity::class.java))
+                        startActivity(Intent(this, StudentHomeActivity::class.java))
                         finish()
                         true
                     }
-                    R.id.nav_workout -> true
+                    R.id.nav_workout -> {
+                        startActivity(Intent(this, ExerciciosActivity::class.java))
+                        finish()
+                        true
+                    }
                     R.id.nav_social -> {
                         startActivity(Intent(this, SocialActivity::class.java))
                         finish()

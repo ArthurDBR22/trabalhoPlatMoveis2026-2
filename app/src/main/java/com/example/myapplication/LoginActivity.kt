@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
             } else if (user == "aluno" || user.isNotBlank()) {
                 if (pass == "aluno" || pass.isNotBlank()) {
                     Toast.makeText(this, "Login de Aluno realizado com sucesso!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, com.example.telasocialepublicacao.SocialActivity::class.java))
+                    startActivity(Intent(this, StudentHomeActivity::class.java))
                     finishAffinity()
                 } else {
                     llUserInput.setBackgroundResource(R.drawable.bg_edittext_error)

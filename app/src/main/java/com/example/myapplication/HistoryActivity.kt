@@ -10,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 import com.example.telasocialepublicacao.SocialActivity
 
 class HistoryActivity : AppCompatActivity() {
@@ -47,8 +46,13 @@ class HistoryActivity : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.nav_profile
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home, R.id.nav_workout -> {
-                    startActivity(Intent(this, TelaTreinosActivity::class.java))
+                R.id.nav_home -> {
+                    startActivity(Intent(this, StudentHomeActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_workout -> {
+                    startActivity(Intent(this, ExerciciosActivity::class.java))
                     finish()
                     true
                 }
