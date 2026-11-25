@@ -12,19 +12,24 @@ import kotlinx.coroutines.tasks.await
 import java.util.Date
 
 class UnifitRepositoryImpl(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 ) : IUnifitRepository {
 
     // ----------------------------------------------------
-    // PERFIL E PAPÉIS
+    // PERFIL, ALUNOS E PAPÉIS
     // ----------------------------------------------------
     override suspend fun getUserProfile(userId: String): User? {
         return try {
             val snapshot = firestore.collection("users").document(userId).get().await()
             snapshot.toObject(User::class.java)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
+    }
+
+    override suspend fun saveUserProfile(user: User): Result<Unit> = runCatching {
+        require(user.id.isNotBlank()) { "ID do usuário não pode ser vazio" }
+        firestore.collection("users").document(user.id).set(user).await()
     }
 
     override suspend fun isUserInstructor(userId: String): Boolean {
@@ -32,8 +37,55 @@ class UnifitRepositoryImpl(
         return user.role == UserRole.INSTRUCTOR.name || user.role == UserRole.ADMIN.name
     }
 
+    override fun getAllStudents(): Flow<List<User>> = callbackFlow {
+        val query = firestore.collection("users")
+            .whereEqualTo("role", UserRole.STUDENT.name)
+
+        val listener = query.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                close(error)
+                return@addSnapshotListener
+            }
+            val students = snapshot?.toObjects<User>()?.sortedBy { it.name } ?: emptyList()
+            trySend(students)
+        }
+        awaitClose { listener.remove() }
+    }
+
     // ----------------------------------------------------
-    // TREINOS E EXERCÍCIOS ORDENADOS
+    // BIBLIOTECA DE EXERCÍCIOS
+    // ----------------------------------------------------
+    override suspend fun addLibraryExercises(exercises: List<LibraryExercise>): Result<Unit> = runCatching {
+        val batch = firestore.batch()
+        val libraryRef = firestore.collection("exercise_library")
+
+        exercises.forEach { exercise ->
+            val docRef = if (exercise.id.isBlank()) {
+                libraryRef.document()
+            } else {
+                libraryRef.document(exercise.id)
+            }
+            batch.set(docRef, exercise)
+        }
+        batch.commit().await()
+    }
+
+    override fun getLibraryExercises(): Flow<List<LibraryExercise>> = callbackFlow {
+        val query = firestore.collection("exercise_library")
+            .orderBy("name", Query.Direction.ASCENDING)
+
+        val listener = query.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                close(error)
+                return@addSnapshotListener
+            }
+            trySend(snapshot?.toObjects<LibraryExercise>() ?: emptyList())
+        }
+        awaitClose { listener.remove() }
+    }
+
+    // ----------------------------------------------------
+    // TREINOS, TREINO DO DIA E EXERCÍCIOS ORDENADOS
     // ----------------------------------------------------
     override fun getWorkoutPlan(studentId: String, workoutId: String): Flow<WorkoutPlan?> = callbackFlow {
         val docRef = firestore.collection("users")
@@ -70,16 +122,73 @@ class UnifitRepositoryImpl(
         awaitClose { listener.remove() }
     }
 
+    override fun getWorkoutOfTheDay(studentId: String): Flow<Pair<WorkoutPlan, List<WorkoutExercise>>?> = callbackFlow {
+        val workoutsRef = firestore.collection("users")
+            .document(studentId)
+            .collection("workouts")
+            .whereEqualTo("isWorkoutOfDay", true)
+            .limit(1)
+
+        var exercisesListener: com.google.firebase.firestore.ListenerRegistration? = null
+
+        val workoutListener = workoutsRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                close(error)
+                return@addSnapshotListener
+            }
+            val plan = snapshot?.toObjects<WorkoutPlan>()?.firstOrNull()
+            exercisesListener?.remove()
+
+            if (plan == null) {
+                trySend(null)
+            } else {
+                exercisesListener = firestore.collection("users")
+                    .document(studentId)
+                    .collection("workouts")
+                    .document(plan.id)
+                    .collection("exercises")
+                    .orderBy("order", Query.Direction.ASCENDING)
+                    .addSnapshotListener { exSnap, exErr ->
+                        if (exErr != null) {
+                            close(exErr)
+                            return@addSnapshotListener
+                        }
+                        val exercises = exSnap?.toObjects<WorkoutExercise>() ?: emptyList()
+                        trySend(plan to exercises)
+                    }
+            }
+        }
+        awaitClose {
+            exercisesListener?.remove()
+            workoutListener.remove()
+        }
+    }
+
     override suspend fun saveWorkoutWithExercises(
         studentId: String,
         workout: WorkoutPlan,
         exercises: List<WorkoutExercise>
-    ): Result<Unit> = runCatching {
-        val batch = firestore.batch()
+    ): Result<String> = runCatching {
         val userWorkoutsRef = firestore.collection("users")
             .document(studentId)
             .collection("workouts")
 
+        // Se for o novo Treino do Dia, desmarca outros marcados anteriormente
+        if (workout.isWorkoutOfDay) {
+            val previousDayWorkouts = userWorkoutsRef
+                .whereEqualTo("isWorkoutOfDay", true)
+                .get()
+                .await()
+            val resetBatch = firestore.batch()
+            previousDayWorkouts.documents.forEach { doc ->
+                if (doc.id != workout.id) {
+                    resetBatch.update(doc.reference, "isWorkoutOfDay", false)
+                }
+            }
+            resetBatch.commit().await()
+        }
+
+        val batch = firestore.batch()
         val workoutDocRef = if (workout.id.isBlank()) {
             userWorkoutsRef.document()
         } else {
@@ -99,6 +208,7 @@ class UnifitRepositoryImpl(
         }
 
         batch.commit().await()
+        workoutDocRef.id
     }
 
     // ----------------------------------------------------

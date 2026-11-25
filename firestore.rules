@@ -33,13 +33,14 @@ service cloud.firestore {
     // PERFIL DE USUÁRIOS
     // ==========================================
     match /users/{userId} {
-      // Usuário pode ler o próprio perfil; Instrutores podem ler perfis de alunos
+      // Usuário pode ler o próprio perfil; Instrutores/Admins podem ler perfis de alunos
       allow read: if isOwner(userId) || isInstructor();
 
-      // Criação de perfil inicial (o próprio usuário cria com role 'STUDENT' por padrão)
-      allow create: if isOwner(userId) && request.resource.data.role == 'STUDENT';
+      // Criação de perfil inicial (o próprio usuário ou admin cria o documento inicial)
+      // Nota de Produção: Em produção, restrinja ADMIN/INSTRUCTOR via Cloud Functions / Custom Claims.
+      allow create: if (isOwner(userId) && request.resource.data.role in ['STUDENT', 'INSTRUCTOR', 'ADMIN']) || isAdmin();
 
-      // Atualização: Aluno não pode alterar seu próprio role; Admin pode alterar tudo
+      // Atualização: Usuário comum não pode alterar seu próprio role; Admin pode alterar tudo
       allow update: if (isOwner(userId) && request.resource.data.role == resource.data.role) || isAdmin();
 
       allow delete: if isAdmin();
@@ -48,7 +49,7 @@ service cloud.firestore {
       // FICHAS DE TREINO E EXERCÍCIOS
       // ==========================================
       match /workouts/{workoutId} {
-        // Aluno lê suas fichas; Instrutores lêem e gerenciam as fichas
+        // Aluno lê suas fichas; Instrutores/Admins lêem e gerenciam as fichas
         allow read: if isOwner(userId) || isInstructor();
         allow create, update, delete: if isInstructor();
 
@@ -62,7 +63,6 @@ service cloud.firestore {
       // HISTÓRICO DE SESSÕES EXECUTADAS
       // ==========================================
       match /workout_sessions/{sessionId} {
-        // Aluno pode ler e criar seus registros de treino; Instrutores podem acompanhar
         allow read: if isOwner(userId) || isInstructor();
         allow create: if isOwner(userId);
         allow update, delete: if isOwner(userId) || isInstructor();
@@ -112,10 +112,8 @@ service cloud.firestore {
     // FEED SOCIAL DA ACADEMIA
     // ==========================================
     match /posts/{postId} {
-      // Usuários autenticados lêem posts ativos; Instrutores lêem todos
       allow read: if isAuthenticated() && (resource.data.status == 'ACTIVE' || isInstructor());
       allow create: if isAuthenticated() && request.resource.data.authorId == request.auth.uid;
-      // Autor edita/apaga o próprio post; Instrutores/Admins podem moderar/ocultar
       allow update, delete: if isAuthenticated() && (request.auth.uid == resource.data.authorId || isInstructor());
 
       match /comments/{commentId} {

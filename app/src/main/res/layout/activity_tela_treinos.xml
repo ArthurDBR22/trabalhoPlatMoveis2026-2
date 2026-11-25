@@ -38,6 +38,7 @@
                     android:layout_alignParentTop="true">
 
                     <TextView
+                        android:id="@+id/txtGreetingStudent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Olá, João!"
@@ -157,6 +158,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txtProfileName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="João Silva"
@@ -165,9 +167,10 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/txtProfileEmail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="joao_silva"
+                                android:text="joao@unifit.com"
                                 android:textColor="#6C757D"
                                 android:textSize="12sp" />
 
@@ -350,6 +353,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/txtWorkoutDayTitle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Membros inferiores"
@@ -358,6 +362,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/txtWorkoutDayDesc"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
@@ -366,6 +371,7 @@
                                     android:textSize="11sp" />
 
                                 <TextView
+                                    android:id="@+id/txtWorkoutDayDuration"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
@@ -374,6 +380,7 @@
                                     android:textSize="11sp" />
 
                                 <TextView
+                                    android:id="@+id/txtWorkoutDayExercises"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="🏋️ Exercícios: 5"
@@ -381,6 +388,7 @@
                                     android:textSize="11sp" />
 
                                 <TextView
+                                    android:id="@+id/txtWorkoutDayLevel"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="📊 Nível: Intermediário"

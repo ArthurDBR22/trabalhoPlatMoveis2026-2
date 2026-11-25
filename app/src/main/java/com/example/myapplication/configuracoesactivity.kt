@@ -2,10 +2,11 @@ package com.example.myapplication
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.*
-import android.graphics.Color
-import com.example.myapplication.R
+import com.google.firebase.auth.FirebaseAuth
 
 class ConfiguracoesActivity : Activity() {
 
@@ -218,15 +219,20 @@ class ConfiguracoesActivity : Activity() {
 
         AlertDialog.Builder(this)
             .setTitle("Sair da conta")
-            .setMessage("Deseja realmente sair do aplicativo?")
+            .setMessage("Deseja realmente sair da sua conta?")
             .setNegativeButton("Cancelar", null)
             .setPositiveButton("Sair") { _, _ ->
-
+                FirebaseAuth.getInstance().signOut()
                 Toast.makeText(
                     this,
-                    "Configure aqui a saída da sua conta.",
-                    Toast.LENGTH_LONG
+                    "Você saiu da conta.",
+                    Toast.LENGTH_SHORT
                 ).show()
+                val intent = Intent(this, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
+                finishAffinity()
             }
             .show()
     }

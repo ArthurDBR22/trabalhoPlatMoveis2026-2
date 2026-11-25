@@ -1,17 +1,30 @@
 package com.example.telacadastro
 
-import com.example.myapplication.R
-
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.LoginActivity
+import com.example.myapplication.R
+import com.example.myapplication.data.model.User
+import com.example.myapplication.data.model.UserRole
+import com.example.myapplication.data.repository.UnifitRepositoryImpl
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class InstrutorActivity : AppCompatActivity() {
+
+    private val auth = FirebaseAuth.getInstance()
+    private val repository = UnifitRepositoryImpl()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_instrutor) // Aponta para o novo layout
+        setContentView(R.layout.activity_instrutor)
 
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         val edtName = findViewById<EditText>(R.id.edtName)
@@ -23,7 +36,7 @@ class InstrutorActivity : AppCompatActivity() {
         val txtLoginRedirect = findViewById<View>(R.id.txtLoginRedirect)
 
         txtLoginRedirect.setOnClickListener {
-            startActivity(android.content.Intent(this, com.example.myapplication.LoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
@@ -49,19 +62,53 @@ class InstrutorActivity : AppCompatActivity() {
                 edtUser.error = "Este campo é obrigatório."
                 edtPassword.error = "Este campo é obrigatório."
                 edtConfirmPassword.error = "Este campo é obrigatório."
-            } else {
-                layoutErrorBanner.visibility = View.GONE
+                return@setOnClickListener
+            }
 
-                val normalBg = R.drawable.bg_input_rounded
-                edtName.setBackgroundResource(normalBg)
-                edtEmail.setBackgroundResource(normalBg)
-                edtUser.setBackgroundResource(normalBg)
-                edtPassword.setBackgroundResource(normalBg)
-                edtConfirmPassword.setBackgroundResource(normalBg)
+            if (password != confirmPassword || password.length < 6) {
+                layoutErrorBanner.visibility = View.VISIBLE
+                edtPassword.error = "A senha deve ter ao menos 6 caracteres e coincidir."
+                edtConfirmPassword.error = "Verifique a confirmação da senha."
+                return@setOnClickListener
+            }
 
-                android.widget.Toast.makeText(this, "Cadastro de Instrutor realizado com sucesso!", android.widget.Toast.LENGTH_SHORT).show()
-                startActivity(android.content.Intent(this, InstructorHomeActivity::class.java))
-                finishAffinity()
+            layoutErrorBanner.visibility = View.GONE
+            val normalBg = R.drawable.bg_input_rounded
+            edtName.setBackgroundResource(normalBg)
+            edtEmail.setBackgroundResource(normalBg)
+            edtUser.setBackgroundResource(normalBg)
+            edtPassword.setBackgroundResource(normalBg)
+            edtConfirmPassword.setBackgroundResource(normalBg)
+
+            btnRegister.isEnabled = false
+            lifecycleScope.launch {
+                try {
+                    val authResult = auth.createUserWithEmailAndPassword(email, password).await()
+                    val uid = authResult.user?.uid ?: error("Falha ao obter UID do instrutor")
+
+                    val newInstructor = User(
+                        id = uid,
+                        name = name,
+                        email = email,
+                        role = UserRole.ADMIN.name
+                    )
+                    repository.saveUserProfile(newInstructor).getOrThrow()
+
+                    Toast.makeText(
+                        this@InstrutorActivity,
+                        "Cadastro de Instrutor/Admin realizado com sucesso!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this@InstrutorActivity, InstructorHomeActivity::class.java))
+                    finishAffinity()
+                } catch (e: Exception) {
+                    btnRegister.isEnabled = true
+                    Toast.makeText(
+                        this@InstrutorActivity,
+                        "Erro ao cadastrar no Firebase: ${e.localizedMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

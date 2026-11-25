@@ -1,15 +1,5 @@
 package com.example.telatreinosamigosecadastro
 
-import com.example.myapplication.R
-import com.example.myapplication.ConfiguracoesActivity
-import com.example.myapplication.HistoryActivity
-import com.example.myapplication.NotificacoesActivity
-import com.example.myapplication.StudentProfileActivity
-import com.example.myapplication.WorkoutInProgressActivity
-import com.example.telacadastro.CreateWorkoutActivity
-import com.example.telacadastro.StudentExercisesActivity
-import com.example.telasocialepublicacao.SocialActivity
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -19,12 +9,32 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.ConfiguracoesActivity
+import com.example.myapplication.CustomWorkoutActivity
+import com.example.myapplication.HistoryActivity
+import com.example.myapplication.NotificacoesActivity
+import com.example.myapplication.R
+import com.example.myapplication.StudentProfileActivity
+import com.example.myapplication.WorkoutInProgressActivity
+import com.example.myapplication.data.repository.UnifitRepositoryImpl
+import com.example.telacadastro.StudentExercisesActivity
+import com.example.telasocialepublicacao.SocialActivity
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
 
 class TelaTreinosActivity : AppCompatActivity() {
+
+    private val auth = FirebaseAuth.getInstance()
+    private val repository = UnifitRepositoryImpl()
+    private var workoutOfDayId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_treinos)
+
+        loadStudentAndWorkoutOfDay()
 
         // Top Header buttons
         findViewById<ImageButton>(R.id.btnNotificacao)?.setOnClickListener {
@@ -40,10 +50,18 @@ class TelaTreinosActivity : AppCompatActivity() {
         findViewById<CardView>(R.id.cardProfileSummary)?.setOnClickListener { openProfile() }
 
         // Treino do dia / Iniciar
-        val openExercises = { startActivity(Intent(this, StudentExercisesActivity::class.java)) }
+        val openExercises = {
+            val intent = Intent(this, CustomWorkoutActivity::class.java).apply {
+                putExtra("STUDENT_ID", auth.currentUser?.uid)
+                putExtra("WORKOUT_ID", workoutOfDayId)
+            }
+            startActivity(intent)
+        }
         val openWorkoutInProgress = { startActivity(Intent(this, WorkoutInProgressActivity::class.java)) }
 
-        findViewById<TextView>(R.id.btnVerTodosTreinos)?.setOnClickListener { openExercises() }
+        findViewById<TextView>(R.id.btnVerTodosTreinos)?.setOnClickListener {
+            startActivity(Intent(this, StudentExercisesActivity::class.java))
+        }
         findViewById<CardView>(R.id.cardTreinoDoDia)?.setOnClickListener { openExercises() }
         findViewById<Button>(R.id.btnIniciarTreinoHoje)?.setOnClickListener { openWorkoutInProgress() }
 
@@ -57,7 +75,7 @@ class TelaTreinosActivity : AppCompatActivity() {
         }
 
         findViewById<CardView>(R.id.cardMeusTreinos)?.setOnClickListener {
-            startActivity(Intent(this, CreateWorkoutActivity::class.java))
+            openExercises()
         }
 
         // Bottom Navigation Bar
@@ -72,7 +90,7 @@ class TelaTreinosActivity : AppCompatActivity() {
         }
 
         navTreinos?.setOnClickListener {
-            startActivity(Intent(this, StudentExercisesActivity::class.java))
+            openExercises()
         }
 
         navSocial?.setOnClickListener {
@@ -87,6 +105,46 @@ class TelaTreinosActivity : AppCompatActivity() {
         navPerfil?.setOnClickListener {
             startActivity(Intent(this, StudentProfileActivity::class.java))
             finish()
+        }
+    }
+
+    private fun loadStudentAndWorkoutOfDay() {
+        val uid = auth.currentUser?.uid ?: return
+
+        val txtGreetingStudent = findViewById<TextView>(R.id.txtGreetingStudent)
+        val txtProfileName = findViewById<TextView>(R.id.txtProfileName)
+        val txtProfileEmail = findViewById<TextView>(R.id.txtProfileEmail)
+
+        val txtWorkoutDayTitle = findViewById<TextView>(R.id.txtWorkoutDayTitle)
+        val txtWorkoutDayDesc = findViewById<TextView>(R.id.txtWorkoutDayDesc)
+        val txtWorkoutDayDuration = findViewById<TextView>(R.id.txtWorkoutDayDuration)
+        val txtWorkoutDayExercises = findViewById<TextView>(R.id.txtWorkoutDayExercises)
+        val txtWorkoutDayLevel = findViewById<TextView>(R.id.txtWorkoutDayLevel)
+
+        lifecycleScope.launch {
+            val user = repository.getUserProfile(uid)
+            if (user != null) {
+                val firstName = user.name.substringBefore(" ").ifBlank { "Aluno" }
+                txtGreetingStudent?.text = "Olá, $firstName!"
+                txtProfileName?.text = user.name.ifBlank { user.email }
+                txtProfileEmail?.text = user.email
+            }
+        }
+
+        lifecycleScope.launch {
+            repository.getWorkoutOfTheDay(uid)
+                .catch { }
+                .collect { pair ->
+                    if (pair != null) {
+                        val (plan, exercises) = pair
+                        workoutOfDayId = plan.id
+                        txtWorkoutDayTitle?.text = plan.title
+                        txtWorkoutDayDesc?.text = plan.description.ifBlank { "Objetivo: ${plan.goal}" }
+                        txtWorkoutDayDuration?.text = "⏱️ Duração: ${plan.averageDurationMinutes} min"
+                        txtWorkoutDayExercises?.text = "🏋️ Exercícios: ${exercises.size}"
+                        txtWorkoutDayLevel?.text = "📊 Nível: ${plan.level}"
+                    }
+                }
         }
     }
 }

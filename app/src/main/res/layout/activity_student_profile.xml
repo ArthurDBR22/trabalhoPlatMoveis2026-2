@@ -441,6 +441,20 @@
                     android:textStyle="bold"
                     app:cornerRadius="16dp" />
 
+                <!-- Logout Button -->
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="#FEE2E2"
+                    android:text="Sair da conta"
+                    android:textAllCaps="false"
+                    android:textColor="#DC2626"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="16dp" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
