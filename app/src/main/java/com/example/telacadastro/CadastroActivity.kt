@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.LoginActivity
 import com.example.myapplication.R
-import com.example.myapplication.TelaTreinosActivity
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.model.UserRole
 import com.example.myapplication.data.repository.UnifitRepositoryImpl
+import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
