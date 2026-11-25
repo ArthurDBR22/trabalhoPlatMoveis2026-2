@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.data.repository.UnifitRepositoryImpl
-import com.example.myapplication.data.seed.UnifitDatabaseSeeder
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.catch
@@ -36,16 +35,10 @@ class CustomWorkoutActivity : AppCompatActivity() {
         val rvExercises = findViewById<RecyclerView>(R.id.rvExercises)
         rvExercises.layoutManager = LinearLayoutManager(this)
 
-        val defaultExercises = UnifitDatabaseSeeder.DEFAULT_LIBRARY_EXERCISES.mapIndexed { index, libEx ->
-            Exercise(
-                order = index + 1,
-                name = libEx.name,
-                muscleGroup = libEx.muscleGroup,
-                sets = libEx.defaultSets,
-                reps = libEx.defaultReps,
-                weightKg = libEx.defaultWeightKg.toInt()
-            )
-        }
+        val defaultExercises = listOf(
+            Exercise(order = 1, name = "Supino Reto", muscleGroup = "Peitoral", sets = 4, reps = "10-12", weightKg = 20),
+            Exercise(order = 2, name = "Agachamento", muscleGroup = "Pernas", sets = 4, reps = "10", weightKg = 30)
+        )
         rvExercises.adapter = ExerciseAdapter(defaultExercises)
 
         val studentId = intent.getStringExtra("STUDENT_ID") ?: auth.currentUser?.uid

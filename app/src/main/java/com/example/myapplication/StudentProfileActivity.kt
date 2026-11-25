@@ -105,11 +105,38 @@ class StudentProfileActivity : AppCompatActivity() {
         edtWeight: EditText?
     ) {
         val uid = currentUserId() ?: return
+        val txtProfileName = findViewById<TextView>(R.id.txtProfileName)
+        val txtProfileHandle = findViewById<TextView>(R.id.txtProfileHandle)
+        val txtStatTreinos = findViewById<TextView>(R.id.txtStatTreinos)
+        val txtStatDias = findViewById<TextView>(R.id.txtStatDias)
+        val txtStatConquistas = findViewById<TextView>(R.id.txtStatConquistas)
+        val txtStatFreq = findViewById<TextView>(R.id.txtStatFreq)
+
         lifecycleScope.launch {
             try {
                 val doc = firestore.collection("users").document(uid).get().await()
                 if (doc.exists()) {
-                    doc.getString("name")?.takeIf { it.isNotBlank() }?.let { edtName?.setText(it) }
+                    val nomeSalvo = doc.getString("name") ?: ""
+                    val handleSalvo = doc.getString("handle") ?: ""
+                    
+                    val treinos = doc.getLong("completedWorkouts")?.toString() ?: "0"
+                    val dias = doc.getLong("consecutiveDays")?.toString() ?: "0"
+                    val conquistas = doc.getLong("achievements")?.toString() ?: "0"
+                    val freq = doc.getString("frequency") ?: "0%"
+
+                    if (nomeSalvo.isNotBlank()) {
+                        edtName?.setText(nomeSalvo)
+                        txtProfileName?.text = nomeSalvo
+                    }
+                    if (handleSalvo.isNotBlank()) {
+                        txtProfileHandle?.text = if (handleSalvo.startsWith("@")) handleSalvo else "@$handleSalvo"
+                    }
+                    
+                    txtStatTreinos?.text = treinos
+                    txtStatDias?.text = dias
+                    txtStatConquistas?.text = conquistas
+                    txtStatFreq?.text = freq
+
                     doc.getString("email")?.takeIf { it.isNotBlank() }?.let { edtEmail?.setText(it) }
                     doc.getString("birthDate")?.takeIf { it.isNotBlank() }?.let { edtDob?.setText(it) }
                     doc.getString("gender")?.takeIf { it.isNotBlank() }?.let { edtGender?.setText(it) }

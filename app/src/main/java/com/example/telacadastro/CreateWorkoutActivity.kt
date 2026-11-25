@@ -23,7 +23,6 @@ import com.example.myapplication.data.model.User
 import com.example.myapplication.data.model.WorkoutExercise
 import com.example.myapplication.data.model.WorkoutPlan
 import com.example.myapplication.data.repository.UnifitRepositoryImpl
-import com.example.myapplication.data.seed.UnifitDatabaseSeeder
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -35,7 +34,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
     private var studentsList: List<User> = emptyList()
     private var selectedStudent: User? = null
-    private var libraryExercises: List<LibraryExercise> = UnifitDatabaseSeeder.DEFAULT_LIBRARY_EXERCISES
+    private var libraryExercises: List<LibraryExercise> = emptyList()
     private val currentExercises = mutableListOf<WorkoutExercise>()
 
     private lateinit var recyclerExercises: RecyclerView
@@ -147,21 +146,44 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
     private fun loadInitialThreeExercises() {
         currentExercises.clear()
-        UnifitDatabaseSeeder.DEFAULT_LIBRARY_EXERCISES.forEachIndexed { index, libEx ->
-            currentExercises.add(
-                WorkoutExercise(
-                    id = "ex_dia_${index + 1}",
-                    order = index + 1,
-                    name = libEx.name,
-                    muscleGroup = libEx.muscleGroup,
-                    sets = libEx.defaultSets,
-                    reps = libEx.defaultReps,
-                    weightKg = libEx.defaultWeightKg,
-                    equipment = libEx.equipment,
-                    notes = libEx.instructions
-                )
+        
+        // Use default exercises since seeder is no longer available
+        val defaultExercises = listOf(
+            WorkoutExercise(
+                id = "ex_dia_1",
+                order = 1,
+                name = "Supino Reto",
+                muscleGroup = "Peitoral",
+                sets = 4,
+                reps = "10-12",
+                weightKg = 20.0,
+                equipment = "Barra",
+                notes = "Foque na contração"
+            ),
+            WorkoutExercise(
+                id = "ex_dia_2",
+                order = 2,
+                name = "Agachamento Livre",
+                muscleGroup = "Pernas",
+                sets = 4,
+                reps = "10",
+                weightKg = 30.0,
+                equipment = "Barra Livre",
+                notes = "Mantenha a postura"
+            ),
+            WorkoutExercise(
+                id = "ex_dia_3",
+                order = 3,
+                name = "Puxada Frente",
+                muscleGroup = "Costas",
+                sets = 3,
+                reps = "12",
+                weightKg = 35.0,
+                equipment = "Polia",
+                notes = "Aperte as escápulas"
             )
-        }
+        )
+        currentExercises.addAll(defaultExercises)
         refreshExercisesList()
     }
 

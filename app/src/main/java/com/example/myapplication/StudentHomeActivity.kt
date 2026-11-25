@@ -96,26 +96,26 @@ class StudentHomeActivity : AppCompatActivity() {
         val txtStatConquistas = findViewById<TextView>(R.id.txtStatConquistas)
         val txtStatFreq = findViewById<TextView>(R.id.txtStatFreq)
 
-        // Set immediate default values so UI displays instantly without "Carregando..." or "0"
-        txtGreeting?.text = "Olá, João!"
-        txtStudentName?.text = "João Silva"
-        txtStudentHandle?.text = "@joao_silva"
-        txtStatTreinos?.text = "24"
-        txtStatDias?.text = "15"
-        txtStatConquistas?.text = "5"
-        txtStatFreq?.text = "85%"
+        // Estado inicial de carregamento ou "vazio" até o Firebase responder
+        txtGreeting?.text = "Olá, ..."
+        txtStudentName?.text = "Carregando..."
+        txtStudentHandle?.text = "@usuario"
+        txtStatTreinos?.text = "0"
+        txtStatDias?.text = "0"
+        txtStatConquistas?.text = "0"
+        txtStatFreq?.text = "0%"
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val docRef = firestore.collection("users").document(userId)
                 val doc = docRef.get().await()
                 if (doc.exists()) {
-                    val name = doc.getString("name") ?: "João Silva"
-                    val handle = doc.getString("handle") ?: "@joao_silva"
-                    val treinos = doc.getLong("completedWorkouts")?.toString() ?: "24"
-                    val dias = doc.getLong("consecutiveDays")?.toString() ?: "15"
-                    val conquistas = doc.getLong("achievements")?.toString() ?: "5"
-                    val freq = doc.getString("frequency") ?: "85%"
+                    val name = doc.getString("name") ?: "Aluno"
+                    val handle = doc.getString("handle") ?: "@usuario"
+                    val treinos = doc.getLong("completedWorkouts")?.toString() ?: "0"
+                    val dias = doc.getLong("consecutiveDays")?.toString() ?: "0"
+                    val conquistas = doc.getLong("achievements")?.toString() ?: "0"
+                    val freq = doc.getString("frequency") ?: "0%"
 
                     withContext(Dispatchers.Main) {
                         txtGreeting?.text = "Olá, ${name.substringBefore(" ")}!"
@@ -126,20 +126,9 @@ class StudentHomeActivity : AppCompatActivity() {
                         txtStatConquistas?.text = conquistas
                         txtStatFreq?.text = freq
                     }
-                } else {
-                    // Initialize document in Firestore with sample defaults
-                    val defaultData = mapOf(
-                        "name" to "João Silva",
-                        "handle" to "@joao_silva",
-                        "completedWorkouts" to 24L,
-                        "consecutiveDays" to 15L,
-                        "achievements" to 5L,
-                        "frequency" to "85%"
-                    )
-                    docRef.set(defaultData).await()
                 }
             } catch (e: Exception) {
-                // Keep defaults
+                // Manter zeros se falhar
             }
         }
     }

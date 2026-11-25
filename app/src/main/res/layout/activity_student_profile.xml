@@ -85,17 +85,19 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txtProfileName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="João Silva"
+                                android:text="Carregando..."
                                 android:textColor="#0A192F"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/txtProfileHandle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="joao silva"
+                                android:text="\@usuario"
                                 android:textColor="#6C757D"
                                 android:textSize="12sp" />
 
@@ -103,9 +105,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:text="Disciplina hoje, resultados amanhã."
-                                android:textColor="#6C757D"
-                                android:textSize="11sp" />
+                                android:text="&quot;Disciplina hoje, resultados amanhã!&quot;"
+                                android:textColor="#007BFF"
+                                android:textSize="11sp"
+                                android:textStyle="italic" />
                         </LinearLayout>
 
                         <!-- Level Badge -->
@@ -142,7 +145,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:elevation="2dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:id="@+id/txtStatTreinos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treinos\nrealizados" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
                     </LinearLayout>
 
@@ -156,7 +159,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:elevation="2dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:id="@+id/txtStatDias" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dias\nconsecutivos" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
                     </LinearLayout>
 
@@ -170,7 +173,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:elevation="2dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:id="@+id/txtStatConquistas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Conquistas\nalcançadas" android:textAlignment="center" android:textColor="#6C757D" android:textSize="9sp"/>
                     </LinearLayout>
 
@@ -184,7 +187,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:elevation="2dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="85%" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:id="@+id/txtStatFreq" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:textColor="#0A192F" android:textSize="16sp" android:textStyle="bold"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Frequência\nmédia treinos" android:textAlignment="center" android:textColor="#6C757D" android:textSize="8sp"/>
                     </LinearLayout>
                 </LinearLayout>

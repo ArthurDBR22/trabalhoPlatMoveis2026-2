@@ -125,7 +125,7 @@
                         android:layout_marginBottom="2dp"
                         android:src="@drawable/baseline_groups_24"
                         app:tint="#007BFF" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="28" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/txtStatAlunos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alunos ativos" android:textColor="#6C757D" android:textSize="9sp"/>
                 </LinearLayout>
 
@@ -144,7 +144,7 @@
                         android:layout_marginBottom="2dp"
                         android:src="@drawable/baseline_fitness_center_24"
                         app:tint="#28A745" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/txtStatTreinosCriados" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treinos criados" android:textColor="#6C757D" android:textSize="9sp"/>
                 </LinearLayout>
 
@@ -163,28 +163,10 @@
                         android:layout_marginBottom="2dp"
                         android:src="@drawable/baseline_calendar_month_24"
                         app:tint="#9333EA" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/txtStatAulas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aulas do dia" android:textColor="#6C757D" android:textSize="9sp"/>
                 </LinearLayout>
 
-                <!-- Avaliação média -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="85dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="6dp"
-                    android:background="@drawable/bg_input_rounded"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginBottom="2dp"
-                        android:src="@drawable/baseline_star_24"
-                        app:tint="#FFC107" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4,9" android:textColor="#0A192F" android:textSize="15sp" android:textStyle="bold"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Avaliação média" android:textColor="#6C757D" android:textSize="9sp"/>
-                </LinearLayout>
             </LinearLayout>
 
             <!-- Seção: Ações Rápidas -->
@@ -201,19 +183,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutStats" />
 
-            <TextView
-                android:id="@+id/txtSeeAllActions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="Ver todas >"
-                android:textColor="#007BFF"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/txtActionsTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtActionsTitle" />
-
+            <!-- Ações Grid -->
             <LinearLayout
                 android:id="@+id/layoutActionsGrid"
                 android:layout_width="0dp"
@@ -257,25 +227,12 @@
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginStart="4dp"
                     android:background="@drawable/bg_input_rounded"
                     android:gravity="center"
                     android:orientation="vertical">
                     <ImageView android:layout_width="22dp" android:layout_height="22dp" android:layout_marginBottom="4dp" android:src="@drawable/baseline_calendar_month_24" app:tint="#FD7E14"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Agendar\naula" android:textAlignment="center" android:textColor="#FD7E14" android:textSize="11sp" android:textStyle="bold"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/cardViewEvaluations"
-                    android:layout_width="0dp"
-                    android:layout_height="90dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="4dp"
-                    android:background="@drawable/bg_input_rounded"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageView android:layout_width="22dp" android:layout_height="22dp" android:layout_marginBottom="4dp" android:src="@drawable/baseline_star_24" app:tint="#6F42C1"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ver\navaliações" android:textAlignment="center" android:textColor="#6F42C1" android:textSize="11sp" android:textStyle="bold"/>
                 </LinearLayout>
             </LinearLayout>
 

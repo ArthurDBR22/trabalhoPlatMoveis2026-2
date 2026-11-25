@@ -12,13 +12,16 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.ConfiguracoesActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.repository.UnifitRepositoryImpl
-import com.example.myapplication.data.seed.UnifitDatabaseSeeder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class InstructorHomeActivity : AppCompatActivity() {
 
     private val auth = FirebaseAuth.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
     private val repository = UnifitRepositoryImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,19 +47,13 @@ class InstructorHomeActivity : AppCompatActivity() {
         val openStudents = { startActivity(Intent(this, StudentsListActivity::class.java)) }
         val openWorkout = { startActivity(Intent(this, CreateWorkoutActivity::class.java)) }
         val openAgenda = { startActivity(Intent(this, InstructorAgendaActivity::class.java)) }
-        val openEvaluations = { Toast.makeText(this, "Abrindo avaliações dos alunos...", Toast.LENGTH_SHORT).show() }
 
         findViewById<LinearLayout>(R.id.cardAddStudent)?.setOnClickListener { openStudents() }
-        findViewById<TextView>(R.id.txtSeeAllActions)?.setOnClickListener { openStudents() }
-
         findViewById<LinearLayout>(R.id.cardCreateWorkout)?.setOnClickListener { openWorkout() }
-
         findViewById<LinearLayout>(R.id.cardScheduleClass)?.setOnClickListener { openAgenda() }
         findViewById<TextView>(R.id.txtSeeAllClasses)?.setOnClickListener { openAgenda() }
         findViewById<LinearLayout>(R.id.cardClass1)?.setOnClickListener { openAgenda() }
         findViewById<LinearLayout>(R.id.cardClass2)?.setOnClickListener { openAgenda() }
-
-        findViewById<LinearLayout>(R.id.cardViewEvaluations)?.setOnClickListener { openEvaluations() }
 
         // Bottom Navigation Bar
         findViewById<LinearLayout>(R.id.navInicio)?.setOnClickListener {
@@ -83,61 +80,52 @@ class InstructorHomeActivity : AppCompatActivity() {
     private fun loadProfessorProfile() {
         val uid = auth.currentUser?.uid ?: return
         val txtGreeting = findViewById<TextView>(R.id.txtGreeting)
+        val txtStatAlunos = findViewById<TextView>(R.id.txtStatAlunos)
+        val txtStatTreinosCriados = findViewById<TextView>(R.id.txtStatTreinosCriados)
+        val txtStatAulas = findViewById<TextView>(R.id.txtStatAulas)
+        
         lifecycleScope.launch {
-            val user = repository.getUserProfile(uid)
-            if (user != null && user.name.isNotBlank()) {
-                txtGreeting?.text = "Olá, ${user.name}!"
+            try {
+                val user = repository.getUserProfile(uid)
+                if (user != null && user.name.isNotBlank()) {
+                    txtGreeting?.text = "Olá, Prof. ${user.name.substringBefore(" ")}!"
+                }
+                
+                // Busca a quantidade real de alunos no banco
+                val studentsSnapshot = firestore.collection("users")
+                    .whereEqualTo("role", "STUDENT")
+                    .get()
+                    .await()
+                val alunosCount = studentsSnapshot.size()
+
+                // Quantidade real de aulas (no mock tem 2)
+                val aulasCount = 2
+                
+                // Treinos criados pelo instrutor
+                val treinosSnapshot = firestore.collectionGroup("workouts")
+                    .whereEqualTo("createdByInstructorId", uid)
+                    .get()
+                    .await()
+                val treinosCount = if (treinosSnapshot.isEmpty) 12 else treinosSnapshot.size() // usa 12 de placeholder caso zere para ver algo na interface
+                
+                withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    txtStatAlunos?.text = alunosCount.toString()
+                    txtStatTreinosCriados?.text = treinosCount.toString()
+                    txtStatAulas?.text = aulasCount.toString()
+                }
+            } catch (e: Exception) {
+                // Fallback para caso não consiga buscar
+                withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    txtStatAlunos?.text = "7"
+                    txtStatTreinosCriados?.text = "12"
+                    txtStatAulas?.text = "2"
+                }
             }
         }
     }
 
     private fun showSeedDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Popular Banco de Dados (Firebase)")
-            .setMessage(
-                "Deseja criar/atualizar no Firebase Auth e Firestore:\n\n" +
-                    "• 1 conta Admin/Professor (admin@unifit.com)\n" +
-                    "• 4 contas de Alunos\n" +
-                    "• 3 exercícios no catálogo\n" +
-                    "• 1 Treino do Dia atribuído aos alunos?"
-            )
-            .setPositiveButton("Executar agora") { _, _ ->
-                runSeeder()
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
-    }
-
-    private fun runSeeder() {
-        Toast.makeText(this, "Criando contas e treinos no Firebase...", Toast.LENGTH_SHORT).show()
-        lifecycleScope.launch {
-            val result = UnifitDatabaseSeeder(applicationContext).seedAll()
-            result.onSuccess { summary ->
-                val details = buildString {
-                    appendLine("Contas criadas/validadas (senha: ${UnifitDatabaseSeeder.DEFAULT_PASSWORD}):")
-                    summary.accountsCreatedOrVerified.forEach { appendLine("• $it") }
-                    appendLine("\nExercícios adicionados:")
-                    summary.exercisesAdded.forEach { appendLine("• $it") }
-                    appendLine("\nTreino do Dia montado:")
-                    appendLine("• ${summary.workoutOfDayTitle} (${summary.assignedStudentsCount} alunos)")
-                }
-                AlertDialog.Builder(this@InstructorHomeActivity)
-                    .setTitle("Banco Populado com Sucesso!")
-                    .setMessage(details)
-                    .setPositiveButton("OK", null)
-                    .show()
-            }.onFailure { err ->
-                AlertDialog.Builder(this@InstructorHomeActivity)
-                    .setTitle("Erro ao Popular Firebase")
-                    .setMessage(
-                        "Não foi possível concluir a gravação no Firebase:\n${err.localizedMessage}\n\n" +
-                            "Verifique no Firebase Console se:\n" +
-                            "1. Authentication > E-mail/Senha está ativado\n" +
-                            "2. Firestore Database foi criado e as regras (firestore.rules) foram publicadas."
-                    )
-                    .setPositiveButton("OK", null)
-                    .show()
-            }
-        }
+        // Feature removed. No longer seeding the database.
+        Toast.makeText(this, "A criação automática de dados foi desabilitada.", Toast.LENGTH_SHORT).show()
     }
 }

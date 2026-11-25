@@ -9,11 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.LoginActivity
+import com.example.myapplication.StudentHomeActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.model.UserRole
 import com.example.myapplication.data.repository.UnifitRepositoryImpl
-import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -102,7 +102,7 @@ class CadastroActivity : AppCompatActivity() {
                     repository.saveUserProfile(newUser).getOrThrow()
 
                     Toast.makeText(this@CadastroActivity, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@CadastroActivity, TelaTreinosActivity::class.java))
+                    startActivity(Intent(this@CadastroActivity, StudentHomeActivity::class.java))
                     finishAffinity()
                 } catch (e: Exception) {
                     btnRegister.isEnabled = true

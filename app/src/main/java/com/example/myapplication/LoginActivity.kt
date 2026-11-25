@@ -15,9 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.data.model.UserRole
 import com.example.myapplication.data.repository.UnifitRepositoryImpl
-import com.example.myapplication.data.seed.UnifitDatabaseSeeder
 import com.example.telacadastro.InstructorHomeActivity
-import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -71,15 +69,15 @@ class LoginActivity : AppCompatActivity() {
             val isStudentShortcut = rawUser.equals("aluno", ignoreCase = true)
 
             val email = when {
-                isAdminShortcut -> UnifitDatabaseSeeder.ADMIN_EMAIL
+                isAdminShortcut -> "admin@unifit.com"
                 isStudentShortcut -> "joao@unifit.com"
                 else -> rawUser
             }
             val password = when {
                 isAdminShortcut && (rawPass == "admin" || rawPass == "professor") ->
-                    UnifitDatabaseSeeder.DEFAULT_PASSWORD
+                    "Unifit2025!"
                 isStudentShortcut && rawPass == "aluno" ->
-                    UnifitDatabaseSeeder.DEFAULT_PASSWORD
+                    "Unifit2025!"
                 else -> rawPass
             }
 
@@ -122,61 +120,9 @@ class LoginActivity : AppCompatActivity() {
 
                 navigateByRole(role, profile?.name)
             } catch (e: Exception) {
-                if (isDemoShortcut || email in UnifitDatabaseSeeder.DEFAULT_ACCOUNTS.map { it.email }) {
-                    offerSeedOrOfflineDialog(email, password, fallbackAsInstructor, e)
-                } else {
-                    showInputError(llUserInput, llPassInput, llError)
-                }
+                showInputError(llUserInput, llPassInput, llError)
             }
         }
-    }
-
-    private fun offerSeedOrOfflineDialog(
-        email: String,
-        password: String,
-        fallbackAsInstructor: Boolean,
-        error: Exception
-    ) {
-        AlertDialog.Builder(this)
-            .setTitle("Configurar Contas no Firebase")
-            .setMessage(
-                "Não foi possível autenticar ($email): ${error.localizedMessage}\n\n" +
-                    "Se você acabou de ativar o Firebase Authentication (E-mail/Senha) e as regras do Firestore, " +
-                    "toque em \"Criar Contas (Seed)\" para criar automaticamente as 5 contas, 3 exercícios e o Treino do Dia."
-            )
-            .setPositiveButton("Criar Contas (Seed)") { _, _ ->
-                lifecycleScope.launch {
-                    Toast.makeText(this@LoginActivity, "Criando contas no Firebase...", Toast.LENGTH_SHORT).show()
-                    val seedResult = UnifitDatabaseSeeder(applicationContext).seedAll()
-                    seedResult.onSuccess {
-                        try {
-                            val result = auth.signInWithEmailAndPassword(email, password).await()
-                            val uid = result.user?.uid
-                            val profile = uid?.let { repository.getUserProfile(it) }
-                            val role = profile?.role ?: if (fallbackAsInstructor) UserRole.ADMIN.name else UserRole.STUDENT.name
-                            navigateByRole(role, profile?.name)
-                        } catch (loginErr: Exception) {
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Contas criadas! Erro ao entrar: ${loginErr.localizedMessage}",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }.onFailure { seedErr ->
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Erro no Seed Firebase: ${seedErr.localizedMessage}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            }
-            .setNeutralButton("Entrar Offline") { _, _ ->
-                val role = if (fallbackAsInstructor) UserRole.ADMIN.name else UserRole.STUDENT.name
-                navigateByRole(role, null)
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
     }
 
     private fun navigateByRole(role: String, name: String?) {
@@ -186,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, InstructorHomeActivity::class.java))
         } else {
             Toast.makeText(this, "Bem-vindo(a), ${name ?: "Aluno"}!", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, TelaTreinosActivity::class.java))
+            startActivity(Intent(this, StudentHomeActivity::class.java))
         }
         finishAffinity()
     }

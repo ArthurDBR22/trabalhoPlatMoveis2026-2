@@ -54,7 +54,6 @@
 
 
         <activity android:name="com.example.telatreinosamigosecadastro.DecisaoCadastroActivity" />
-        <activity android:name="com.example.telatreinosamigosecadastro.TelaTreinosActivity" />
         <activity android:name="com.example.telatreinosamigosecadastro.AdicionarAmigosActivity" />
         <activity android:name="com.example.telatreinosamigosecadastro.MeusAmigosActivity" />
 
