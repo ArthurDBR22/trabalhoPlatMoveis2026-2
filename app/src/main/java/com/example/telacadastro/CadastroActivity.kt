@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.LoginActivity
 import com.example.myapplication.R
+import com.example.myapplication.TelaTreinosActivity
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.model.UserRole
 import com.example.myapplication.data.repository.UnifitRepositoryImpl
-import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -49,8 +49,10 @@ class CadastroActivity : AppCompatActivity() {
             val confirmPassword = edtConfirmPassword.text.toString().trim()
 
             if (name.isEmpty() || email.isEmpty() || user.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                // Exibe o banner de aviso no topo
                 layoutErrorBanner.visibility = View.VISIBLE
 
+                // Altera o fundo dos campos para o vermelho de erro
                 val errorBg = R.drawable.bg_input_error
                 edtName.setBackgroundResource(errorBg)
                 edtEmail.setBackgroundResource(errorBg)
@@ -58,6 +60,7 @@ class CadastroActivity : AppCompatActivity() {
                 edtPassword.setBackgroundResource(errorBg)
                 edtConfirmPassword.setBackgroundResource(errorBg)
 
+                // Adiciona a mensagem de erro nativa em cada campo
                 edtName.error = "Este campo é obrigatório."
                 edtEmail.error = "Este campo é obrigatório."
                 edtUser.error = "Este campo é obrigatório."
@@ -73,7 +76,10 @@ class CadastroActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Se estiver tudo preenchido e válido, oculta os erros e prossegue
             layoutErrorBanner.visibility = View.GONE
+
+            // Remove os erros visuais dos campos
             val normalBg = R.drawable.bg_input_rounded
             edtName.setBackgroundResource(normalBg)
             edtEmail.setBackgroundResource(normalBg)

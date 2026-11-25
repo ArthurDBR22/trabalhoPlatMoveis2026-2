@@ -10,17 +10,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.myapplication.data.repository.UnifitRepositoryImpl
 import com.example.telasocialepublicacao.SocialActivity
-import com.example.telatreinosamigosecadastro.TelaTreinosActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class StudentProfileActivity : AppCompatActivity() {
 
     private var isEditingPersonalInfo = false
     private val auth = FirebaseAuth.getInstance()
-    private val repository = UnifitRepositoryImpl()
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +57,7 @@ class StudentProfileActivity : AppCompatActivity() {
                     field?.isFocusable = false
                     field?.isFocusableInTouchMode = false
                 }
-                Toast.makeText(this, "Informações pessoais atualizadas com sucesso!", Toast.LENGTH_SHORT).show()
+                saveUserProfile(edtName, edtEmail, edtDob, edtGender, edtHeight, edtWeight)
             }
         }
 
@@ -65,7 +66,7 @@ class StudentProfileActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnSaveProfile)?.setOnClickListener {
-            Toast.makeText(this, "Todas as alterações do perfil foram salvas!", Toast.LENGTH_SHORT).show()
+            saveUserProfile(edtName, edtEmail, edtDob, edtGender, edtHeight, edtWeight)
         }
 
         findViewById<Button>(R.id.btnLogout)?.setOnClickListener {
@@ -74,12 +75,12 @@ class StudentProfileActivity : AppCompatActivity() {
 
         // Bottom Navigation
         findViewById<LinearLayout>(R.id.navInicio)?.setOnClickListener {
-            startActivity(Intent(this, TelaTreinosActivity::class.java))
+            startActivity(Intent(this, StudentHomeActivity::class.java))
             finish()
         }
 
         findViewById<LinearLayout>(R.id.navTreinos)?.setOnClickListener {
-            startActivity(Intent(this, TelaTreinosActivity::class.java))
+            startActivity(Intent(this, ExerciciosActivity::class.java))
             finish()
         }
 
@@ -93,6 +94,8 @@ class StudentProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun currentUserId(): String? = auth.currentUser?.uid
+
     private fun loadUserProfile(
         edtName: EditText?,
         edtEmail: EditText?,
@@ -101,15 +104,69 @@ class StudentProfileActivity : AppCompatActivity() {
         edtHeight: EditText?,
         edtWeight: EditText?
     ) {
-        val uid = auth.currentUser?.uid ?: return
+        val uid = currentUserId() ?: return
         lifecycleScope.launch {
-            val user = repository.getUserProfile(uid) ?: return@launch
-            if (user.name.isNotBlank()) edtName?.setText(user.name)
-            if (user.email.isNotBlank()) edtEmail?.setText(user.email)
-            if (user.birthDate.isNotBlank()) edtDob?.setText(user.birthDate)
-            if (user.gender.isNotBlank()) edtGender?.setText(user.gender)
-            if (user.heightCm > 0) edtHeight?.setText("${user.heightCm / 100.0} m")
-            if (user.currentWeightKg > 0) edtWeight?.setText("${user.currentWeightKg} kg")
+            try {
+                val doc = firestore.collection("users").document(uid).get().await()
+                if (doc.exists()) {
+                    doc.getString("name")?.takeIf { it.isNotBlank() }?.let { edtName?.setText(it) }
+                    doc.getString("email")?.takeIf { it.isNotBlank() }?.let { edtEmail?.setText(it) }
+                    doc.getString("birthDate")?.takeIf { it.isNotBlank() }?.let { edtDob?.setText(it) }
+                    doc.getString("gender")?.takeIf { it.isNotBlank() }?.let { edtGender?.setText(it) }
+                    doc.getString("height")?.takeIf { it.isNotBlank() }?.let { edtHeight?.setText(it) }
+                    doc.getString("weight")?.takeIf { it.isNotBlank() }?.let { edtWeight?.setText(it) }
+                }
+            } catch (_: Exception) {
+                Toast.makeText(
+                    this@StudentProfileActivity,
+                    "Não foi possível carregar os dados do perfil.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun saveUserProfile(
+        edtName: EditText?,
+        edtEmail: EditText?,
+        edtDob: EditText?,
+        edtGender: EditText?,
+        edtHeight: EditText?,
+        edtWeight: EditText?
+    ) {
+        val uid = currentUserId()
+        if (uid == null) {
+            Toast.makeText(this, "Usuário não autenticado.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val profileData = mapOf(
+            "name" to (edtName?.text?.toString()?.trim().orEmpty()),
+            "email" to (edtEmail?.text?.toString()?.trim().orEmpty()),
+            "birthDate" to (edtDob?.text?.toString()?.trim().orEmpty()),
+            "gender" to (edtGender?.text?.toString()?.trim().orEmpty()),
+            "height" to (edtHeight?.text?.toString()?.trim().orEmpty()),
+            "weight" to (edtWeight?.text?.toString()?.trim().orEmpty())
+        )
+
+        lifecycleScope.launch {
+            try {
+                firestore.collection("users")
+                    .document(uid)
+                    .set(profileData, SetOptions.merge())
+                    .await()
+                Toast.makeText(
+                    this@StudentProfileActivity,
+                    "Dados salvos no Firebase Firestore!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this@StudentProfileActivity,
+                    "Erro ao salvar no Firebase: ${e.localizedMessage}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 

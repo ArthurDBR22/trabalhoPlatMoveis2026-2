@@ -1,6 +1,10 @@
 package com.example.telatreinosamigosecadastro
 
 import com.example.myapplication.R
+import com.example.myapplication.ExerciciosActivity
+import com.example.myapplication.StudentHomeActivity
+import com.example.myapplication.StudentProfileActivity
+import com.example.telasocialepublicacao.SocialActivity
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -21,13 +25,13 @@ class AdicionarAmigosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adicionar_amigos)
 
-        // 1. Cabeçalho: Ação de Voltar[cite: 2]
+        // 1. Cabeçalho: Ação de Voltar
         val btnVoltar = findViewById<ImageButton>(R.id.btnVoltar)
         btnVoltar.setOnClickListener {
-            finish() // Retorna à tela anterior
+            finish()
         }
 
-        // 2. Busca e Botão "Ver todas"[cite: 2]
+        // 2. Busca e Botão "Ver todas"
         val etBuscarUsuario = findViewById<EditText>(R.id.etBuscarUsuario)
         val tvVerTodas = findViewById<TextView>(R.id.tvVerTodas)
 
@@ -35,7 +39,7 @@ class AdicionarAmigosActivity : AppCompatActivity() {
             Toast.makeText(this, "Navegando para lista completa de sugestões...", Toast.LENGTH_SHORT).show()
         }
 
-        // 3. Cards de Ações Rápidas[cite: 2]
+        // 3. Cards de Ações Rápidas
         val cardEscanearQr = findViewById<LinearLayout>(R.id.cardEscanearQr)
         val cardConvidarAmigos = findViewById<LinearLayout>(R.id.cardConvidarAmigos)
 
@@ -47,7 +51,7 @@ class AdicionarAmigosActivity : AppCompatActivity() {
             Toast.makeText(this, "Gerando link de convite...", Toast.LENGTH_SHORT).show()
         }
 
-        // 4. Botões de Adicionar das Sugestões[cite: 2]
+        // 4. Botões de Adicionar das Sugestões
         val btnAddMariana = findViewById<Button>(R.id.btnAddMariana)
         val btnAddLucas = findViewById<Button>(R.id.btnAddLucas)
 
@@ -63,7 +67,7 @@ class AdicionarAmigosActivity : AppCompatActivity() {
             Toast.makeText(this, "Solicitação enviada para Lucas Ferreira!", Toast.LENGTH_SHORT).show()
         }
 
-        // 5. Opções de Convite Inferiores[cite: 2]
+        // 5. Opções de Convite Inferiores
         val btnConviteWhatsapp = findViewById<LinearLayout>(R.id.btnConviteWhatsapp)
         val btnCopiarLink = findViewById<LinearLayout>(R.id.btnCopiarLink)
         val btnCompartilhar = findViewById<LinearLayout>(R.id.btnCompartilhar)
@@ -103,27 +107,30 @@ class AdicionarAmigosActivity : AppCompatActivity() {
             Toast.makeText(this, "Exibindo seu QR Code de perfil...", Toast.LENGTH_SHORT).show()
         }
 
-        // 6. Barra de Navegação Inferior Fixa (4 Telas)[cite: 2]
+        // 6. Barra de Navegação Inferior Fixa
         val navInicio = findViewById<LinearLayout>(R.id.navInicio)
         val navTreinos = findViewById<LinearLayout>(R.id.navTreinos)
         val navSocial = findViewById<LinearLayout>(R.id.navSocial)
         val navPerfil = findViewById<LinearLayout>(R.id.navPerfil)
 
-        navInicio.setOnClickListener {
-            Toast.makeText(this, "Navegando para Início", Toast.LENGTH_SHORT).show()
-        }
-
-        navTreinos.setOnClickListener {
-            startActivity(Intent(this, TelaTreinosActivity::class.java))
+        navInicio?.setOnClickListener {
+            startActivity(Intent(this, StudentHomeActivity::class.java))
             finish()
         }
 
-        navSocial.setOnClickListener {
-            // Tela atual
+        navTreinos?.setOnClickListener {
+            startActivity(Intent(this, ExerciciosActivity::class.java))
+            finish()
         }
 
-        navPerfil.setOnClickListener {
-            Toast.makeText(this, "Navegando para Perfil", Toast.LENGTH_SHORT).show()
+        navSocial?.setOnClickListener {
+            startActivity(Intent(this, SocialActivity::class.java))
+            finish()
+        }
+
+        navPerfil?.setOnClickListener {
+            startActivity(Intent(this, StudentProfileActivity::class.java))
+            finish()
         }
     }
 }

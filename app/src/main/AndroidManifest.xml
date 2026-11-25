@@ -33,6 +33,7 @@
         <activity android:name=".ExerciciosActivity" />
         <activity android:name=".DetalheExercicioActivity" />
         <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".StudentHomeActivity" />
 
 
         <activity android:name="com.example.telacadastro.CadastroActivity" />

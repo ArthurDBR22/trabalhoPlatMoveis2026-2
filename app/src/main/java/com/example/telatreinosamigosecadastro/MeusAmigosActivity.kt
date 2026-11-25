@@ -1,6 +1,8 @@
 package com.example.telatreinosamigosecadastro
 
 import com.example.myapplication.R
+import com.example.myapplication.ExerciciosActivity
+import com.example.myapplication.StudentHomeActivity
 import com.example.myapplication.StudentProfileActivity
 import com.example.telasocialepublicacao.SocialActivity
 
@@ -84,13 +86,12 @@ class MeusAmigosActivity : AppCompatActivity() {
         val navPerfil = findViewById<LinearLayout>(R.id.navPerfil)
 
         navInicio?.setOnClickListener {
-            startActivity(Intent(this, TelaTreinosActivity::class.java))
+            startActivity(Intent(this, StudentHomeActivity::class.java))
             finish()
         }
 
         navTreinos?.setOnClickListener {
-            val intent = Intent(this, TelaTreinosActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, ExerciciosActivity::class.java))
             finish()
         }
 
