@@ -295,20 +295,22 @@
             </LinearLayout>
 
             <!-- RECYCLERVIEW DE EXERCÍCIOS -->
+
+            <!-- BOTÕES INFERIORES -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerExercises"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/item_exercise"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/headerExercises" />
+                app:layout_constraintTop_toBottomOf="@+id/headerExercises"
+                tools:listitem="@layout/item_exercise" />
 
-            <!-- BOTÕES INFERIORES -->
             <LinearLayout
                 android:id="@+id/layoutBottomButtons"
                 android:layout_width="0dp"
@@ -322,29 +324,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyclerExercises">
 
                 <Button
-                    android:id="@+id/btnPreviewWorkout"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="6dp"
-                    android:backgroundTint="#EBF5FF"
-                    android:text="👁️ Visualizar treino"
-                    android:textAllCaps="false"
-                    android:textColor="#007BFF"
-                    android:textSize="12sp"
-                    app:cornerRadius="8dp" />
-
-                <Button
                     android:id="@+id/btnSaveWorkout"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_weight="1.2"
-                    android:layout_marginStart="6dp"
                     android:backgroundTint="#007BFF"
                     android:text="✓ Salvar treino"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:cornerRadius="8dp" />
             </LinearLayout>
 

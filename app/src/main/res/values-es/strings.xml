@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">UniFit</string>
+    <string name="settings">Configuraciones</string>
+    <string name="preferences">PREFERENCIAS</string>
+    <string name="language">Idioma</string>
+    <string name="notifications_interaction">NOTIFICACIONES E INTERACCIÓN</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="sounds">Sonidos</string>
+    <string name="haptic_feedback">Vibración táctil</string>
+    <string name="other_options">OTRAS OPCIONES</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="portuguese">Português</string>
+    <string name="english">English</string>
+    <string name="spanish">Español</string>
+    <string name="lang_pt_selected">Portugués seleccionado.</string>
+    <string name="lang_en_selected">Inglés seleccionado.</string>
+    <string name="lang_es_selected">Español seleccionado.</string>
+</resources>

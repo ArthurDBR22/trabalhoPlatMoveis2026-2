@@ -82,13 +82,6 @@ class CreateWorkoutActivity : AppCompatActivity() {
             showAddExerciseDialog()
         }
 
-        findViewById<Button>(R.id.btnPreviewWorkout)?.setOnClickListener {
-            val previewIntent = Intent(this, CustomWorkoutActivity::class.java).apply {
-                putExtra("STUDENT_ID", selectedStudent?.id)
-            }
-            startActivity(previewIntent)
-        }
-
         findViewById<Button>(R.id.btnSaveWorkout)?.setOnClickListener {
             val student = selectedStudent
             if (student == null || student.id.isBlank()) {

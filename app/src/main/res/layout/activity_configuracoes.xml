@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Configurações"
+                    android:text="@string/settings"
                     android:textColor="#EAF4FF"
                     android:textSize="13sp"/>
 
@@ -78,7 +78,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PREFERÊNCIAS"
+                android:text="@string/preferences"
                 android:textColor="#526DAB"
                 android:textSize="14sp"
                 android:layout_marginBottom="12dp"/>
@@ -89,58 +89,6 @@
                 android:orientation="vertical"
                 android:background="@drawable/bg_config_card"
                 android:padding="17dp">
-
-                <!-- LEMBRETES -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        android:src="@drawable/icone_dica"
-                        android:contentDescription="Lembretes"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Lembretes de treino"
-                            android:textColor="#173A82"
-                            android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Receba lembretes para seus treinos"
-                            android:textColor="#7185A8"
-                            android:textSize="12sp"/>
-
-                    </LinearLayout>
-
-                    <Switch
-                        android:id="@+id/switchLembretes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:buttonTint="#087CF5"/>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="17dp"
-                    android:background="#E2ECF7"/>
 
                 <!-- IDIOMA -->
                 <LinearLayout
@@ -159,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="Idioma"
+                        android:text="@string/language"
                         android:textColor="#173A82"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
@@ -181,7 +129,7 @@
                         android:layout_weight="1"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="Português"
+                        android:text="@string/portuguese"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:background="@drawable/bg_config_option_selected"
@@ -195,7 +143,7 @@
                         android:layout_marginStart="7dp"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="English"
+                        android:text="@string/english"
                         android:textSize="12sp"
                         android:textColor="#526DAB"
                         android:background="@drawable/bg_config_option"/>
@@ -208,7 +156,7 @@
                         android:layout_marginStart="7dp"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="Español"
+                        android:text="@string/spanish"
                         android:textSize="12sp"
                         android:textColor="#526DAB"
                         android:background="@drawable/bg_config_option"/>
@@ -221,7 +169,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NOTIFICAÇÕES E INTERAÇÃO"
+                android:text="@string/notifications_interaction"
                 android:textColor="#526DAB"
                 android:textSize="14sp"
                 android:layout_marginTop="23dp"
@@ -256,7 +204,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Notificações"
+                            android:text="@string/notifications"
                             android:textColor="#173A82"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
@@ -307,7 +255,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sons"
+                            android:text="@string/sounds"
                             android:textColor="#173A82"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
@@ -358,7 +306,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Feedback háptico"
+                            android:text="@string/haptic_feedback"
                             android:textColor="#173A82"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
@@ -387,7 +335,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="OUTRAS OPÇÕES"
+                android:text="@string/other_options"
                 android:textColor="#526DAB"
                 android:textSize="14sp"
                 android:layout_marginTop="23dp"
@@ -399,84 +347,6 @@
                 android:orientation="vertical"
                 android:background="@drawable/bg_config_card"
                 android:padding="17dp">
-
-                <!-- PRIVACIDADE -->
-                <LinearLayout
-                    android:id="@+id/btnPrivacidade"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_privacidade"
-                        android:contentDescription="Privacidade"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="12dp"
-                        android:text="Privacidade e segurança"
-                        android:textColor="#173A82"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="›"
-                        android:textColor="#087CF5"
-                        android:textSize="28sp"/>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E2ECF7"/>
-
-                <!-- SOBRE -->
-                <LinearLayout
-                    android:id="@+id/btnSobre"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_sobre"
-                        android:contentDescription="Sobre"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="12dp"
-                        android:text="Sobre o UniFit"
-                        android:textColor="#173A82"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="›"
-                        android:textColor="#087CF5"
-                        android:textSize="28sp"/>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E2ECF7"/>
 
                 <!-- SAIR -->
                 <LinearLayout
@@ -498,7 +368,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="Sair da conta"
+                        android:text="@string/logout"
                         android:textColor="#D94A4A"
                         android:textSize="15sp"/>
 

@@ -1,16 +1,15 @@
 package com.example.myapplication
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
-class ConfiguracoesActivity : Activity() {
+class ConfiguracoesActivity : AppCompatActivity() {
 
-    private lateinit var switchLembretes: Switch
     private lateinit var switchNotificacoes: Switch
     private lateinit var switchSons: Switch
     private lateinit var switchVibracao: Switch
@@ -22,6 +21,7 @@ class ConfiguracoesActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LocaleHelper.applySavedLocale(this)
         setContentView(R.layout.activity_configuracoes)
 
         inicializarComponentes()
@@ -33,8 +33,6 @@ class ConfiguracoesActivity : Activity() {
 
     // LOCALIZAR COMPONENTES
     private fun inicializarComponentes() {
-
-        switchLembretes = findViewById(R.id.switchLembretes)
         switchNotificacoes = findViewById(R.id.switchNotificacoes)
         switchSons = findViewById(R.id.switchSons)
         switchVibracao = findViewById(R.id.switchVibracao)
@@ -44,10 +42,6 @@ class ConfiguracoesActivity : Activity() {
 
     // CARREGAR CONFIGURAÇÕES SALVAS
     private fun carregarPreferencias() {
-
-        switchLembretes.isChecked =
-            preferencias.getBoolean("lembretes", true)
-
         switchNotificacoes.isChecked =
             preferencias.getBoolean("notificacoes", true)
 
@@ -73,13 +67,6 @@ class ConfiguracoesActivity : Activity() {
 
     // SALVAR ALTERAÇÕES DOS SWITCHES
     private fun configurarSwitches() {
-
-        switchLembretes.setOnCheckedChangeListener { _, marcado ->
-            preferencias.edit()
-                .putBoolean("lembretes", marcado)
-                .apply()
-        }
-
         switchNotificacoes.setOnCheckedChangeListener { _, marcado ->
             preferencias.edit()
                 .putBoolean("notificacoes", marcado)
@@ -99,9 +86,8 @@ class ConfiguracoesActivity : Activity() {
         }
     }
 
-    // CONFIGURAR IDIOMA
+    // CONFIGURAR IDIOMA DINÂMICO
     private fun configurarIdioma() {
-
         grupoIdioma.setOnCheckedChangeListener { _, checkedId ->
 
             val idioma = when (checkedId) {
@@ -110,29 +96,29 @@ class ConfiguracoesActivity : Activity() {
                 else -> "portugues"
             }
 
-            preferencias.edit()
-                .putString("idioma", idioma)
-                .apply()
+            val idiomaAtual = preferencias.getString("idioma", "portugues")
+            if (idioma != idiomaAtual) {
+                LocaleHelper.setLocale(this, idioma)
 
-            atualizarAparenciaIdioma()
+                val mensagem = when (idioma) {
+                    "ingles" -> "English selecionado."
+                    "espanhol" -> "Español selecionado."
+                    else -> "Português selecionado."
+                }
 
-            val mensagem = when (idioma) {
-                "ingles" -> "English selecionado."
-                "espanhol" -> "Español selecionado."
-                else -> "Português selecionado."
+                Toast.makeText(
+                    this,
+                    mensagem,
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                recreate()
             }
-
-            Toast.makeText(
-                this,
-                mensagem,
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 
     // ATUALIZAR CORES DOS IDIOMAS
     private fun atualizarAparenciaIdioma() {
-
         val botoes = listOf(
             findViewById<RadioButton>(R.id.radioPortugues),
             findViewById<RadioButton>(R.id.radioIngles),
@@ -140,21 +126,15 @@ class ConfiguracoesActivity : Activity() {
         )
 
         for (botao in botoes) {
-
             if (botao.isChecked) {
-
                 botao.setBackgroundResource(
                     R.drawable.bg_config_option_selected
                 )
-
                 botao.setTextColor(Color.WHITE)
-
             } else {
-
                 botao.setBackgroundResource(
                     R.drawable.bg_config_option
                 )
-
                 botao.setTextColor(
                     Color.rgb(82, 109, 171)
                 )
@@ -164,59 +144,19 @@ class ConfiguracoesActivity : Activity() {
 
     // CONFIGURAR BOTÕES
     private fun configurarBotoes() {
-
         findViewById<TextView>(R.id.btnVoltarConfiguracoes)
-            .setOnClickListener {
+            ?.setOnClickListener {
                 finish()
             }
 
-        findViewById<LinearLayout>(R.id.btnPrivacidade)
-            .setOnClickListener {
-                mostrarPrivacidade()
-            }
-
-        findViewById<LinearLayout>(R.id.btnSobre)
-            .setOnClickListener {
-                mostrarSobre()
-            }
-
         findViewById<LinearLayout>(R.id.btnSair)
-            .setOnClickListener {
+            ?.setOnClickListener {
                 confirmarSaida()
             }
     }
 
-    // PRIVACIDADE
-    private fun mostrarPrivacidade() {
-
-        AlertDialog.Builder(this)
-            .setTitle("Privacidade e segurança")
-            .setMessage(
-                "Suas configurações e preferências do UniFit " +
-                        "são armazenadas localmente neste dispositivo."
-            )
-            .setPositiveButton("Entendi", null)
-            .show()
-    }
-
-    // SOBRE O APLICATIVO
-    private fun mostrarSobre() {
-
-        AlertDialog.Builder(this)
-            .setTitle("Sobre o UniFit")
-            .setMessage(
-                "UniFit\n\n" +
-                        "Mais saúde, mais movimento.\n\n" +
-                        "Aplicativo desenvolvido para auxiliar " +
-                        "na organização dos treinos e atividades físicas."
-            )
-            .setPositiveButton("Fechar", null)
-            .show()
-    }
-
     // CONFIRMAR SAÍDA
     private fun confirmarSaida() {
-
         AlertDialog.Builder(this)
             .setTitle("Sair da conta")
             .setMessage("Deseja realmente sair da sua conta?")

@@ -56,31 +56,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtAppName" />
 
-                    <ImageView
-                        android:id="@+id/btnProfile"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/bg_input_rounded"
-                        android:backgroundTint="#22FFFFFF"
-                        android:padding="8dp"
-                        android:src="@drawable/baseline_person_24"
-                        app:tint="@android:color/white"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/btnNotification"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginEnd="12dp"
-                        android:background="@drawable/bg_input_rounded"
-                        android:backgroundTint="#22FFFFFF"
-                        android:padding="8dp"
-                        android:src="@drawable/baseline_notifications_24"
-                        app:tint="@android:color/white"
-                        app:layout_constraintEnd_toStartOf="@+id/btnProfile"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <TextView
                         android:id="@+id/txtAgendaTitle"
                         android:layout_width="wrap_content"
@@ -106,6 +81,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>
 
+            <!-- Week Calendar Bar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -119,57 +95,55 @@
                 android:padding="8dp">
 
                 <ImageView
+                    android:id="@+id/btnPrevWeek"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:src="@android:drawable/ic_media_previous"
                     app:tint="#007BFF" />
 
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Seg" android:textColor="#6C757D" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="22" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                <LinearLayout android:id="@+id/dayContainer1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/txtDayName1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Seg" android:textColor="#6C757D" android:textSize="10sp"/>
+                    <TextView android:id="@+id/txtDayNumber1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="22" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
                 </LinearLayout>
 
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ter" android:textColor="#6C757D" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="23" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                <LinearLayout android:id="@+id/dayContainer2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/txtDayName2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ter" android:textColor="#6C757D" android:textSize="10sp"/>
+                    <TextView android:id="@+id/txtDayNumber2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="23" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
                 </LinearLayout>
 
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Qua" android:textColor="#6C757D" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                <LinearLayout android:id="@+id/dayContainer3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/txtDayName3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Qua" android:textColor="#6C757D" android:textSize="10sp"/>
+                    <TextView android:id="@+id/txtDayNumber3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:background="@drawable/bg_input_rounded"
-                    android:backgroundTint="#007BFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingVertical="6dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hoje" android:textColor="@android:color/white" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25" android:textColor="@android:color/white" android:textSize="14sp" android:textStyle="bold"/>
+                <LinearLayout android:id="@+id/dayContainer4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/txtDayName4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Qui" android:textColor="#6C757D" android:textSize="10sp"/>
+                    <TextView android:id="@+id/txtDayNumber4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
                 </LinearLayout>
 
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sex" android:textColor="#6C757D" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="26" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                <LinearLayout android:id="@+id/dayContainer5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/txtDayName5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sex" android:textColor="#6C757D" android:textSize="10sp"/>
+                    <TextView android:id="@+id/txtDayNumber5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="26" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
                 </LinearLayout>
 
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sáb" android:textColor="#6C757D" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="27" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                <LinearLayout android:id="@+id/dayContainer6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/txtDayName6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sáb" android:textColor="#6C757D" android:textSize="10sp"/>
+                    <TextView android:id="@+id/txtDayNumber6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="27" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
                 </LinearLayout>
 
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dom" android:textColor="#6C757D" android:textSize="10sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="28" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                <LinearLayout android:id="@+id/dayContainer7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/txtDayName7" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dom" android:textColor="#6C757D" android:textSize="10sp"/>
+                    <TextView android:id="@+id/txtDayNumber7" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="28" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/btnNextWeek"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:src="@android:drawable/ic_media_next"
                     app:tint="#007BFF" />
             </LinearLayout>
@@ -193,6 +167,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/txtClassesHeaderTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -202,6 +177,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
+            <!-- Aula 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -224,6 +200,34 @@
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="12dp" android:orientation="vertical">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treino de Pernas" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="5 alunos - Sala de Musculação" android:textColor="#6C757D" android:textSize="10sp" />
+                </LinearLayout>
+
+                <ImageView android:layout_width="16dp" android:layout_height="16dp" android:src="@android:drawable/ic_menu_send" app:tint="#007BFF" />
+            </LinearLayout>
+
+            <!-- Aula 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <View android:layout_width="4dp" android:layout_height="35dp" android:background="#28A745" />
+
+                <LinearLayout android:layout_width="75dp" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10:00" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11:00" android:textColor="#6C757D" android:textSize="11sp"/>
+                </LinearLayout>
+
+                <ImageView android:layout_width="40dp" android:layout_height="40dp" android:layout_marginStart="4dp" android:background="@drawable/bg_input_rounded" android:backgroundTint="#E8F8F5" android:padding="8dp" android:src="@drawable/baseline_fitness_center_24" app:tint="#28A745" />
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="12dp" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Treino Funcional" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="8 alunos - Área Funcional" android:textColor="#6C757D" android:textSize="10sp" />
                 </LinearLayout>
 
                 <ImageView android:layout_width="16dp" android:layout_height="16dp" android:src="@android:drawable/ic_menu_send" app:tint="#007BFF" />

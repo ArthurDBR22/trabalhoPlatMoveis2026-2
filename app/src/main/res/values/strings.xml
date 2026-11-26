@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">UniFit</string>
+    <string name="settings">Configurações</string>
+    <string name="preferences">PREFERÊNCIAS</string>
+    <string name="language">Idioma</string>
+    <string name="notifications_interaction">NOTIFICAÇÕES E INTERAÇÃO</string>
+    <string name="notifications">Notificações</string>
+    <string name="sounds">Sons</string>
+    <string name="haptic_feedback">Feedback háptico</string>
+    <string name="other_options">OUTRAS OPÇÕES</string>
+    <string name="logout">Sair da conta</string>
+    <string name="portuguese">Português</string>
+    <string name="english">English</string>
+    <string name="spanish">Español</string>
+    <string name="lang_pt_selected">Português selecionado.</string>
+    <string name="lang_en_selected">English selecionado.</string>
+    <string name="lang_es_selected">Español selecionado.</string>
 </resources>
