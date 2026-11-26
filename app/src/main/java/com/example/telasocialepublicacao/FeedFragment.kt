@@ -4,13 +4,17 @@ import com.example.myapplication.R
 import com.example.myapplication.ExerciciosActivity
 import com.example.myapplication.StudentHomeActivity
 import com.example.myapplication.StudentProfileActivity
+import com.example.myapplication.data.model.FeedPost
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +23,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class FeedFragment : Fragment() {
+
+    private val firestore = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+    private val currentUserId = auth.currentUser?.uid ?: "default"
+    
+    private val listaPublicacoes = mutableListOf<FeedPost>()
+    private lateinit var adapter: PostAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.activity_feed, container, false)
@@ -29,15 +40,14 @@ class FeedFragment : Fragment() {
 
         val recyclerFeed = view.findViewById<RecyclerView>(R.id.recycler_feed)
         recyclerFeed.layoutManager = LinearLayoutManager(requireContext())
+        adapter = PostAdapter(listaPublicacoes, currentUserId) { postClicked ->
+            curtirPublicacao(postClicked)
+        }
+        recyclerFeed.adapter = adapter
 
-        val listaPublicacoes = listOf(
-            Postagem("Lucas Ferreira", "Treino de hoje concluído! Foco, disciplina e resultado! 💪", "142", android.R.drawable.ic_menu_gallery),
-            Postagem("Mariana Costa", "Dia de perna! 💪", "98", android.R.drawable.ic_menu_gallery),
-            Postagem("Juliana Lima", "Treino concluído e me sentindo cada dia mais forte! 💙", "76", android.R.drawable.ic_menu_gallery),
-            Postagem("João Silva", "Corridinha matinal para começar bem o dia!", "54", android.R.drawable.ic_menu_gallery)
-        )
+        // Escuta atualizações do Firestore em tempo real (Realtime Listener)
+        ouvirFeedEmTempoReal()
 
-        recyclerFeed.adapter = PostAdapter(listaPublicacoes)
         val fabCriarPost = view.findViewById<FloatingActionButton>(R.id.fab_criar_post)
         fabCriarPost.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -74,6 +84,50 @@ class FeedFragment : Fragment() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+    
+    private fun ouvirFeedEmTempoReal() {
+        firestore.collection("posts")
+            .whereEqualTo("status", "ACTIVE")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Toast.makeText(requireContext(), "Erro ao atualizar feed.", Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null) {
+                    // Ordenamos as publicações localmente no celular (do mais recente ao mais antigo)
+                    val posts = snapshot.toObjects(FeedPost::class.java).sortedByDescending { it.createdAt }
+                    listaPublicacoes.clear()
+                    listaPublicacoes.addAll(posts)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+    }
+
+    private fun curtirPublicacao(post: FeedPost) {
+        if (post.id.isNotBlank()) {
+            val isLiked = post.likedBy.contains(currentUserId)
+            val docRef = firestore.collection("posts").document(post.id)
+            
+            if (isLiked) {
+                // Remove like
+                docRef.update(
+                    "likesCount", FieldValue.increment(-1),
+                    "likedBy", FieldValue.arrayRemove(currentUserId)
+                ).addOnFailureListener {
+                    Toast.makeText(requireContext(), "Erro ao remover curtida.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                // Add like
+                docRef.update(
+                    "likesCount", FieldValue.increment(1),
+                    "likedBy", FieldValue.arrayUnion(currentUserId)
+                ).addOnFailureListener {
+                    Toast.makeText(requireContext(), "Erro ao curtir.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

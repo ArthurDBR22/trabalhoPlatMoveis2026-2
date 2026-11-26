@@ -1,9 +1,12 @@
 package com.example.telasocialepublicacao
 
 import com.example.myapplication.R
-import com.example.myapplication.StudentProfileActivity
-import com.example.myapplication.StudentHomeActivity
 import com.example.myapplication.ExerciciosActivity
+import com.example.myapplication.StudentHomeActivity
+import com.example.myapplication.StudentProfileActivity
+import com.example.myapplication.data.model.FeedPost
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 import android.content.Intent
 import android.net.Uri
@@ -15,15 +18,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.UUID
 
 class CriarPublicacaoFragment : Fragment() {
     private lateinit var edtPublicacao: EditText
     private var categoriaSelecionada = ""
-    private val tipoUsuario = "Aluno"
+    private val firestore = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+    
     private val selecionarMidia =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri> ->
             if (uris.isEmpty()) {
@@ -49,6 +56,27 @@ class CriarPublicacaoFragment : Fragment() {
         val btnCategoriaTreino = view.findViewById<Button>(R.id.btn_categoria_treino)
         val btnCategoriaMotivacao = view.findViewById<Button>(R.id.btn_categoria_motivacao)
         val btnPublicar = view.findViewById<Button>(R.id.btn_publicar)
+
+        val txtNomeUsuario = view.findViewById<TextView>(R.id.txt_nome_usuario)
+        val txtUsernameUsuario = view.findViewById<TextView>(R.id.txt_username_usuario)
+        val txtTipoUsuario = view.findViewById<TextView>(R.id.txt_tipo_usuario)
+
+        // Carregar dados reais do perfil do usuário logado
+        val currentUid = auth.currentUser?.uid
+        if (currentUid != null) {
+            firestore.collection("users").document(currentUid).get()
+                .addOnSuccessListener { doc ->
+                    if (doc.exists()) {
+                        val name = doc.getString("name") ?: "Aluno"
+                        val handle = doc.getString("handle") ?: "usuario"
+                        val role = doc.getString("role") ?: "STUDENT"
+
+                        txtNomeUsuario.text = name
+                        txtUsernameUsuario.text = if (handle.startsWith("@")) " $handle" else " @$handle"
+                        txtTipoUsuario.text = if (role == "INSTRUCTOR" || role == "ADMIN") "Instrutor" else "Aluno"
+                    }
+                }
+        }
 
         btnVoltar.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -85,10 +113,7 @@ class CriarPublicacaoFragment : Fragment() {
                     startActivity(Intent(requireContext(), ExerciciosActivity::class.java))
                     true
                 }
-                R.id.nav_social -> {
-                    startActivity(Intent(requireContext(), SocialActivity::class.java))
-                    true
-                }
+                R.id.nav_social -> true
                 R.id.nav_profile -> {
                     startActivity(Intent(requireContext(), StudentProfileActivity::class.java))
                     true
@@ -104,7 +129,36 @@ class CriarPublicacaoFragment : Fragment() {
             Toast.makeText(requireContext(), "Escreva algo antes de publicar.", Toast.LENGTH_SHORT).show()
             return
         }
-        Toast.makeText(requireActivity(), "Publicação feita!", Toast.LENGTH_SHORT).show()
-        parentFragmentManager.popBackStack()
+        
+        val userId = auth.currentUser?.uid ?: "user_desconhecido"
+        val postId = UUID.randomUUID().toString()
+        
+        // Buscando o nome do usuário para atrelar ao post
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { doc ->
+                val authorName = doc.getString("name") ?: "Usuário Atual"
+                
+                val post = FeedPost(
+                    id = postId,
+                    authorId = userId,
+                    authorName = authorName,
+                    textContent = texto,
+                    likesCount = 0,
+                    commentsCount = 0,
+                    mediaUrl = null // Ninguém publicou foto, então salvamos como nulo
+                )
+                
+                firestore.collection("posts").document(postId).set(post)
+                    .addOnSuccessListener {
+                        Toast.makeText(requireActivity(), "Publicação feita com sucesso!", Toast.LENGTH_SHORT).show()
+                        parentFragmentManager.popBackStack()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(requireActivity(), "Erro ao publicar: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireActivity(), "Erro ao identificar usuário.", Toast.LENGTH_SHORT).show()
+            }
     }
 }

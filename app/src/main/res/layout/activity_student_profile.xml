@@ -111,19 +111,6 @@
                                 android:textStyle="italic" />
                         </LinearLayout>
 
-                        <!-- Level Badge -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_input_rounded"
-                            android:backgroundTint="#EBF5FB"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="8dp"
-                            android:text="Nível\nIntermediário"
-                            android:textAlignment="center"
-                            android:textColor="#007BFF"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -363,71 +350,6 @@
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Saúde e\nbem-estar" android:textAlignment="center" android:textColor="#007BFF" android:textSize="11sp" android:textStyle="bold"/>
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- Notifications Section -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Notificações"
-                            android:textColor="#0A192F"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
-
-                        <!-- Switch 1 -->
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch1" android:orientation="vertical">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lembretes de treino" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Receba lembretes dos seus treinos." android:textColor="#6C757D" android:textSize="11sp"/>
-                            </LinearLayout>
-                            <Switch android:id="@+id/switch1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
-                        </RelativeLayout>
-                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
-
-                        <!-- Switch 2 -->
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch2" android:orientation="vertical">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dicas e motivação" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Frases, conteúdos e dicas de treino." android:textColor="#6C757D" android:textSize="11sp"/>
-                            </LinearLayout>
-                            <Switch android:id="@+id/switch2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
-                        </RelativeLayout>
-                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
-
-                        <!-- Switch 3 -->
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch3" android:orientation="vertical">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Conquistas" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Acompanhe suas metas e evoluções." android:textColor="#6C757D" android:textSize="11sp"/>
-                            </LinearLayout>
-                            <Switch android:id="@+id/switch3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
-                        </RelativeLayout>
-                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
-
-                        <!-- Switch 4 -->
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="8dp">
-                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_toStartOf="@id/switch4" android:orientation="vertical">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Novidades" android:textColor="#0A192F" android:textSize="13sp" android:textStyle="bold"/>
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Atualizações e novos recursos." android:textColor="#6C757D" android:textSize="11sp"/>
-                            </LinearLayout>
-                            <Switch android:id="@+id/switch4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:checked="true"/>
-                        </RelativeLayout>
-
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

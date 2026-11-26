@@ -56,25 +56,6 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/btn_configuracoes"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:contentDescription="Configurações"
-            android:background="@drawable/configuracoes" />
-
-        <ImageButton
-            android:id="@+id/btn_notificacoes"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="8dp"
-            android:layout_toStartOf="@id/btn_configuracoes"
-            android:contentDescription="Notificações"
-            android:background="@drawable/notificacao" />
-
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -121,7 +102,7 @@
                         android:id="@+id/txt_nome_usuario"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="João Silva"
+                        android:text="Carregando..."
                         android:textColor="@color/blue"
                         android:textSize="22sp"
                         android:textStyle="bold" />
@@ -131,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text=" @joao_silva"
+                        android:text=" @usuario"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 

@@ -23,25 +23,6 @@
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
-        <ImageView
-            android:id="@+id/btn_config_header"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:clickable="false"
-            android:focusable="false"
-            android:src="@drawable/configuracoes" />
-        <ImageView
-            android:id="@+id/btn_notificacao_header"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:layout_toStartOf="@id/btn_config_header"
-            android:clickable="false"
-            android:focusable="false"
-            android:src="@drawable/notificacao" />
     </RelativeLayout>
 
     <LinearLayout

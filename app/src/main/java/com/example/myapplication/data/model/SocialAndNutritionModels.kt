@@ -14,6 +14,7 @@ data class FeedPost(
     val textContent: String = "",
     val mediaUrl: String? = null,
     val likesCount: Int = 0,
+    val likedBy: List<String> = emptyList(),
     val commentsCount: Int = 0,
     val isModerated: Boolean = false,
     val status: String = "ACTIVE",      // "ACTIVE", "REPORTED", "HIDDEN"
