@@ -57,35 +57,6 @@
                 app:layout_constraintStart_toEndOf="@+id/btnBack"
                 app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
-            <!-- Ícones do Topo (Guardar e Mais) -->
-            <ImageView
-                android:id="@+id/btnSaveTop"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="18dp"
-                android:background="@drawable/bg_input_rounded"
-                android:backgroundTint="#22FFFFFF"
-                android:padding="8dp"
-                android:src="@drawable/baseline_person_24"
-                app:tint="@android:color/white"
-                app:layout_constraintEnd_toStartOf="@+id/btnMore"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/btnMore"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="18dp"
-                android:background="@drawable/bg_input_rounded"
-                android:backgroundTint="#22FFFFFF"
-                android:padding="8dp"
-                android:src="@drawable/baseline_star_24"
-                app:tint="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <!-- Subtítulo -->
             <TextView
                 android:id="@+id/txtSub"

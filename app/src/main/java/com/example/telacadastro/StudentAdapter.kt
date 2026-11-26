@@ -1,5 +1,6 @@
 package com.example.telacadastro
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,20 @@ class StudentAdapter(
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         val student = studentList[position]
         holder.txtStudentName.text = student.name.ifBlank { student.email }
-        holder.txtStudentStatus.text = "Ativo"
+
+        // Lógica de 3 dias de inatividade
+        val lastAccess = student.updatedAt?.toDate()?.time ?: student.createdAt?.toDate()?.time ?: 0L
+        val threeDaysMs = 3L * 24 * 60 * 60 * 1000
+        val isAtivo = (System.currentTimeMillis() - lastAccess) <= threeDaysMs || lastAccess == 0L
+
+        if (isAtivo) {
+            holder.txtStudentStatus.text = "Ativo"
+            holder.txtStudentStatus.setTextColor(Color.parseColor("#28A745"))
+        } else {
+            holder.txtStudentStatus.text = "Inativo"
+            holder.txtStudentStatus.setTextColor(Color.parseColor("#DC3545"))
+        }
+
         holder.txtStudentWorkout.text = if (student.currentWeightKg > 0) {
             "🏋️ Peso: ${student.currentWeightKg} kg • ${student.email}"
         } else {

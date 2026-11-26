@@ -2,10 +2,13 @@ package com.example.telacadastro
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +24,7 @@ class StudentsListActivity : AppCompatActivity() {
 
     private val repository = UnifitRepositoryImpl()
     private lateinit var studentAdapter: StudentAdapter
+    private var fullStudentList: List<User> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +50,19 @@ class StudentsListActivity : AppCompatActivity() {
         }
         recyclerStudents.adapter = studentAdapter
 
+        // Search Filter
+        findViewById<EditText>(R.id.edtSearchStudent)?.addTextChangedListener { text ->
+            val query = text?.toString()?.trim().orEmpty()
+            val filtered = if (query.isBlank()) {
+                fullStudentList
+            } else {
+                fullStudentList.filter {
+                    it.name.contains(query, ignoreCase = true) || it.email.contains(query, ignoreCase = true)
+                }
+            }
+            studentAdapter.updateList(filtered)
+        }
+
         observeStudents()
         setupBottomNavigation()
     }
@@ -54,17 +71,57 @@ class StudentsListActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repository.getAllStudents()
                 .catch {
-                    // Fallback offline caso o Firestore não esteja acessível ainda
-                    studentAdapter.updateList(fallbackStudents())
+                    val list = fallbackStudents()
+                    fullStudentList = list
+                    studentAdapter.updateList(list)
+                    updateStatsCards(list)
                 }
                 .collect { students ->
-                    if (students.isEmpty()) {
-                        studentAdapter.updateList(fallbackStudents())
-                    } else {
-                        studentAdapter.updateList(students)
-                    }
+                    val list = if (students.isEmpty()) fallbackStudents() else students
+                    fullStudentList = list
+                    studentAdapter.updateList(list)
+                    updateStatsCards(list)
                 }
         }
+    }
+
+    private fun updateStatsCards(students: List<User>) {
+        val txtStatAtivos = findViewById<TextView>(R.id.txtStatAtivos)
+        val txtStatEvoluindo = findViewById<TextView>(R.id.txtStatEvoluindo)
+        val txtStatNovos = findViewById<TextView>(R.id.txtStatNovos)
+        val txtStatInativos = findViewById<TextView>(R.id.txtStatInativos)
+
+        val threeDaysMs = 3L * 24 * 60 * 60 * 1000
+        val now = System.currentTimeMillis()
+
+        var ativosCount = 0
+        var evoluindoCount = 0
+        var inativosCount = 0
+        var novosCount = 0
+
+        students.forEach { student ->
+            val lastAccess = student.updatedAt?.toDate()?.time ?: student.createdAt?.toDate()?.time ?: 0L
+            val isAtivo = (now - lastAccess) <= threeDaysMs || lastAccess == 0L
+
+            if (isAtivo) {
+                ativosCount++
+                evoluindoCount++ // Regra: se estiver ativo, está evoluindo
+            } else {
+                inativosCount++
+            }
+
+            // Regra: cadastrado nos últimos 30 dias é "Novo"
+            val createdAtTime = student.createdAt?.toDate()?.time ?: 0L
+            val thirtyDaysMs = 30L * 24 * 60 * 60 * 1000
+            if (createdAtTime > 0 && (now - createdAtTime) <= thirtyDaysMs) {
+                novosCount++
+            }
+        }
+
+        txtStatAtivos?.text = ativosCount.toString()
+        txtStatEvoluindo?.text = evoluindoCount.toString()
+        txtStatNovos?.text = novosCount.toString()
+        txtStatInativos?.text = inativosCount.toString()
     }
 
     private fun fallbackStudents(): List<User> = listOf(
